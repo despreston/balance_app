@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		484742551AD84B0C000E58FF /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 484742541AD84B0C000E58FF /* BaseViewController.m */; };
 		486A940B1A929E5B00D6785E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 486A940A1A929E5B00D6785E /* main.m */; };
 		486A940E1A929E5B00D6785E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 486A940D1A929E5B00D6785E /* AppDelegate.m */; };
 		486A94141A929E5B00D6785E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 486A94121A929E5B00D6785E /* Main.storyboard */; };
@@ -29,6 +30,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		484742531AD84B0C000E58FF /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		484742541AD84B0C000E58FF /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		486A94051A929E5B00D6785E /* Balance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Balance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		486A94091A929E5B00D6785E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		486A940A1A929E5B00D6785E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -99,6 +102,8 @@
 				486A94151A929E5B00D6785E /* Images.xcassets */,
 				486A94171A929E5B00D6785E /* LaunchScreen.xib */,
 				486A94081A929E5B00D6785E /* Supporting Files */,
+				484742531AD84B0C000E58FF /* BaseViewController.h */,
+				484742541AD84B0C000E58FF /* BaseViewController.m */,
 			);
 			path = Balance;
 			sourceTree = "<group>";
@@ -231,6 +236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				486A940E1A929E5B00D6785E /* AppDelegate.m in Sources */,
+				484742551AD84B0C000E58FF /* BaseViewController.m in Sources */,
 				486A94361A92E70100D6785E /* ToDoItem.m in Sources */,
 				486A94331A92D19100D6785E /* ToDoListViewController.m in Sources */,
 				486A940B1A929E5B00D6785E /* main.m in Sources */,

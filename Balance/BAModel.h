@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ToDoItem : NSObject
+@interface BAModel : NSObject {
+    NSMutableArray *toDoItems;
+}
 
-@property NSString *itemName;
-@property NSString *note;
-@property (readonly) NSDate *creationDate;
+@property (nonatomic, retain) NSMutableArray *toDoItems;
+
++ (id)sharedManager;
 
 @end

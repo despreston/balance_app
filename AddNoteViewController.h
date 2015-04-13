@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ToDoItem.h"
+#import "BAModel.h"
 
 @interface AddNoteViewController : UIViewController
 

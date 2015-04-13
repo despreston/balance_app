@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		484742551AD84B0C000E58FF /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 484742541AD84B0C000E58FF /* BaseViewController.m */; };
+		484742581AD853D4000E58FF /* BANavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 484742571AD853D4000E58FF /* BANavigationController.m */; };
+		4847425B1AD85E1A000E58FF /* BAData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4847425A1AD85E1A000E58FF /* BAData.m */; };
 		486A940B1A929E5B00D6785E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 486A940A1A929E5B00D6785E /* main.m */; };
 		486A940E1A929E5B00D6785E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 486A940D1A929E5B00D6785E /* AppDelegate.m */; };
 		486A94141A929E5B00D6785E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 486A94121A929E5B00D6785E /* Main.storyboard */; };
@@ -16,7 +18,7 @@
 		486A94251A929E5B00D6785E /* BalanceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 486A94241A929E5B00D6785E /* BalanceTests.m */; };
 		486A94301A92D0E000D6785E /* AddNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 486A942F1A92D0E000D6785E /* AddNoteViewController.m */; };
 		486A94331A92D19100D6785E /* ToDoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 486A94321A92D19100D6785E /* ToDoListViewController.m */; };
-		486A94361A92E70100D6785E /* ToDoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 486A94351A92E70100D6785E /* ToDoItem.m */; };
+		486A94361A92E70100D6785E /* BAModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 486A94351A92E70100D6785E /* BAModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +34,10 @@
 /* Begin PBXFileReference section */
 		484742531AD84B0C000E58FF /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		484742541AD84B0C000E58FF /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		484742561AD853D4000E58FF /* BANavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BANavigationController.h; sourceTree = "<group>"; };
+		484742571AD853D4000E58FF /* BANavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BANavigationController.m; sourceTree = "<group>"; };
+		484742591AD85E1A000E58FF /* BAData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAData.h; sourceTree = "<group>"; };
+		4847425A1AD85E1A000E58FF /* BAData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAData.m; sourceTree = "<group>"; };
 		486A94051A929E5B00D6785E /* Balance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Balance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		486A94091A929E5B00D6785E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		486A940A1A929E5B00D6785E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -47,8 +53,8 @@
 		486A942F1A92D0E000D6785E /* AddNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddNoteViewController.m; path = ../AddNoteViewController.m; sourceTree = "<group>"; };
 		486A94311A92D19100D6785E /* ToDoListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoListViewController.h; sourceTree = "<group>"; };
 		486A94321A92D19100D6785E /* ToDoListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoListViewController.m; sourceTree = "<group>"; };
-		486A94341A92E70100D6785E /* ToDoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoItem.h; sourceTree = "<group>"; };
-		486A94351A92E70100D6785E /* ToDoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoItem.m; sourceTree = "<group>"; };
+		486A94341A92E70100D6785E /* BAModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAModel.h; sourceTree = "<group>"; };
+		486A94351A92E70100D6785E /* BAModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,8 +101,8 @@
 				486A940C1A929E5B00D6785E /* AppDelegate.h */,
 				486A940D1A929E5B00D6785E /* AppDelegate.m */,
 				486A94121A929E5B00D6785E /* Main.storyboard */,
-				486A94341A92E70100D6785E /* ToDoItem.h */,
-				486A94351A92E70100D6785E /* ToDoItem.m */,
+				486A94341A92E70100D6785E /* BAModel.h */,
+				486A94351A92E70100D6785E /* BAModel.m */,
 				486A94311A92D19100D6785E /* ToDoListViewController.h */,
 				486A94321A92D19100D6785E /* ToDoListViewController.m */,
 				486A94151A929E5B00D6785E /* Images.xcassets */,
@@ -104,6 +110,10 @@
 				486A94081A929E5B00D6785E /* Supporting Files */,
 				484742531AD84B0C000E58FF /* BaseViewController.h */,
 				484742541AD84B0C000E58FF /* BaseViewController.m */,
+				484742561AD853D4000E58FF /* BANavigationController.h */,
+				484742571AD853D4000E58FF /* BANavigationController.m */,
+				484742591AD85E1A000E58FF /* BAData.h */,
+				4847425A1AD85E1A000E58FF /* BAData.m */,
 			);
 			path = Balance;
 			sourceTree = "<group>";
@@ -235,12 +245,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4847425B1AD85E1A000E58FF /* BAData.m in Sources */,
 				486A940E1A929E5B00D6785E /* AppDelegate.m in Sources */,
 				484742551AD84B0C000E58FF /* BaseViewController.m in Sources */,
-				486A94361A92E70100D6785E /* ToDoItem.m in Sources */,
+				486A94361A92E70100D6785E /* BAModel.m in Sources */,
 				486A94331A92D19100D6785E /* ToDoListViewController.m in Sources */,
 				486A940B1A929E5B00D6785E /* main.m in Sources */,
 				486A94301A92D0E000D6785E /* AddNoteViewController.m in Sources */,
+				484742581AD853D4000E58FF /* BANavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

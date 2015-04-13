@@ -16,30 +16,6 @@
 
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-//    [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x333333)];
-//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-//    
-//    [[UINavigationBar appearance] setTitleTextAttributes:
-//     [NSDictionary dictionaryWithObjectsAndKeys:
-//      [UIColor whiteColor],
-//      NSForegroundColorAttributeName,
-//      [UIColor whiteColor],
-//      NSForegroundColorAttributeName,
-//      [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
-//      NSForegroundColorAttributeName,
-//      [UIFont fontWithName:@"Helvetica Neue Medium" size:0.0],
-//      NSFontAttributeName,
-//      nil]];
-//    
-//    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-//    [[UINavigationBar appearance] setTranslucent:NO];
-//
-//
-    return YES;
-}
-
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

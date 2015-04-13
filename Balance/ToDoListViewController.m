@@ -7,7 +7,7 @@
 //
 
 #import "ToDoListViewController.h"
-#import "ToDoItem.h"
+#import "BAModel.h"
 #import "AddNoteViewController.h"
 #import <Foundation/Foundation.h>
 
@@ -34,7 +34,7 @@
     
     ToDoItem *item3 = [[ToDoItem alloc] init];
     item3.itemName = @"Read textbook";
-    item3.note = @"Textbook note ";
+    item3.note = @"TExtbook note ";
     [toDoItems addObject:item3];
 }
 
@@ -43,6 +43,13 @@
     toDoItems = [ [NSMutableArray alloc] init];
     [self loadInitialData];
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.

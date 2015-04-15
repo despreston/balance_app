@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BAModel.h"
+#import "BAItem.h"
 
 @interface AddNoteViewController : UIViewController
 
-@property (nonatomic, strong) ToDoItem *toDoItem;
+@property (nonatomic, strong) BAItem *toDoItem;
 @property (weak, nonatomic) IBOutlet UITextView *itemNote;
 
 @end

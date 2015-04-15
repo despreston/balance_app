@@ -8,6 +8,7 @@
 
 #import "ToDoListViewController.h"
 #import "BAModel.h"
+#import "BAItem.h"
 #import "AddNoteViewController.h"
 #import <Foundation/Foundation.h>
 
@@ -16,31 +17,33 @@
 @end
 
 @implementation ToDoListViewController {
-    NSMutableArray *toDoItems;
+    BAModel *sharedManager;
 }
 
 @synthesize tableView = _tableView;
 
 - (void)loadInitialData {
-    ToDoItem *item1 = [[ToDoItem alloc] init];
-    item1.itemName = @"Buy Milk";
-    item1.note = @"Testing the note for this buy milk item!";
-    [toDoItems addObject:item1];
     
-    ToDoItem *item2 = [[ToDoItem alloc] init];
+    BAItem *item1 = [[BAItem alloc] init];
+    item1.itemName = @"Buy Milk";
+    item1.note = @"Testing the note for the buy milk item";
+    [sharedManager.toDoItems addObject:item1];
+    
+    BAItem *item2 = [[BAItem alloc] init];
     item2.itemName = @"Do Homework";
     item2.note = @"Homework note";
-    [toDoItems addObject:item2];
+    [sharedManager.toDoItems addObject:item2];
     
-    ToDoItem *item3 = [[ToDoItem alloc] init];
-    item3.itemName = @"Read textbook";
-    item3.note = @"TExtbook note ";
-    [toDoItems addObject:item3];
+    BAItem *item3 = [[BAItem alloc] init];
+    item3.itemName = @"Read Textbook";
+    item3.note = @"Textbook note";
+    [sharedManager.toDoItems addObject:item3];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    toDoItems = [ [NSMutableArray alloc] init];
+    //bamodel.toDoItems = [ [NSMutableArray alloc] init];
+    sharedManager = [BAModel sharedManager];
     [self loadInitialData];
 }
 
@@ -58,15 +61,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [toDoItems count];
+    return [sharedManager.toDoItems count];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showItemNote"]) {
-        //NSLog(@"%@", [self.tableView indexPathForSelectedRow]);
+//        NSLog(@"%@", [self.tableView indexPathForSelectedRow]);
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         AddNoteViewController *destViewController = segue.destinationViewController;
-        destViewController.toDoItem = [toDoItems objectAtIndex:[indexPath row]];
+        destViewController.toDoItem = [sharedManager.toDoItems objectAtIndex:[indexPath row]];
     }
 }
 
@@ -81,10 +84,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
     
-    
-    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ListPrototypeCell" forIndexPath:indexPath];
-    
-    ToDoItem *toDoItem = [toDoItems objectAtIndex: indexPath.row];
+    BAItem *toDoItem = [sharedManager.toDoItems objectAtIndex: indexPath.row];
     cell.textLabel.text = toDoItem.itemName;
     
     return cell;
@@ -96,7 +96,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         //add code here to do what you want when you hit delete
-        [toDoItems removeObjectAtIndex:[indexPath row]];
+        [sharedManager.toDoItems removeObjectAtIndex:[indexPath row]];
         [tableView reloadData];
     }
 }

@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseViewController.h"
 
-@interface ToDoListViewController : BaseViewController <UITableViewDelegate, UITableViewDataSource>
+@interface ToDoListViewController : UITableViewController
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 

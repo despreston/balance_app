@@ -11,6 +11,7 @@
 @implementation BAModel
 
 @synthesize toDoItems;
+@synthesize activeItem;
 
 #pragma mark Singleton Methods
 
@@ -26,6 +27,7 @@
 - (id)init {
     if (self = [super init]) {
         toDoItems = [[NSMutableArray alloc]init];
+        activeItem = NULL;
     }
     return self;
 }

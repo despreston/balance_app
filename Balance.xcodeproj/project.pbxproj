@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		484742581AD853D4000E58FF /* BANavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 484742571AD853D4000E58FF /* BANavigationController.m */; };
+		486037991AE171430032B5C9 /* HelveticaNeue.dfont in Resources */ = {isa = PBXBuildFile; fileRef = 486037981AE171430032B5C9 /* HelveticaNeue.dfont */; };
 		486A940B1A929E5B00D6785E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 486A940A1A929E5B00D6785E /* main.m */; };
 		486A940E1A929E5B00D6785E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 486A940D1A929E5B00D6785E /* AppDelegate.m */; };
 		486A94141A929E5B00D6785E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 486A94121A929E5B00D6785E /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 /* Begin PBXFileReference section */
 		484742561AD853D4000E58FF /* BANavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BANavigationController.h; sourceTree = "<group>"; };
 		484742571AD853D4000E58FF /* BANavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BANavigationController.m; sourceTree = "<group>"; };
+		486037981AE171430032B5C9 /* HelveticaNeue.dfont */ = {isa = PBXFileReference; lastKnownFileType = file; path = HelveticaNeue.dfont; sourceTree = "<group>"; };
 		486A94051A929E5B00D6785E /* Balance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Balance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		486A94091A929E5B00D6785E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		486A940A1A929E5B00D6785E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -72,6 +74,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		486037971AE1701D0032B5C9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				486037981AE171430032B5C9 /* HelveticaNeue.dfont */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		486A93FC1A929E5B00D6785E = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +103,7 @@
 		486A94071A929E5B00D6785E /* Balance */ = {
 			isa = PBXGroup;
 			children = (
+				486037971AE1701D0032B5C9 /* Resources */,
 				486A942E1A92D0E000D6785E /* AddNoteViewController.h */,
 				486A942F1A92D0E000D6785E /* AddNoteViewController.m */,
 				486A940C1A929E5B00D6785E /* AppDelegate.h */,
@@ -222,6 +233,7 @@
 			files = (
 				486A94141A929E5B00D6785E /* Main.storyboard in Resources */,
 				486A94191A929E5B00D6785E /* LaunchScreen.xib in Resources */,
+				486037991AE171430032B5C9 /* HelveticaNeue.dfont in Resources */,
 				486A94161A929E5B00D6785E /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

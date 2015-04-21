@@ -11,6 +11,7 @@
 @interface BAItem : NSObject
 
 @property (nonatomic) NSString *itemName;
-@property (nonatomic) NSString *note;
+@property (nonatomic) NSString *thisTimeNote;
+@property (nonatomic) NSString *nextTimeNote;
 
 @end

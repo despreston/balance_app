@@ -26,23 +26,22 @@
     
     BAItem *item1 = [[BAItem alloc] init];
     item1.itemName = @"Buy Milk";
-    item1.note = @"Testing the note for the buy milk item";
+    item1.thisTimeNote = @"Testing the note for the buy milk item";
     [sharedManager.toDoItems addObject:item1];
     
     BAItem *item2 = [[BAItem alloc] init];
     item2.itemName = @"Do Homework";
-    item2.note = @"Homework note";
+    item2.thisTimeNote = @"Homework note";
     [sharedManager.toDoItems addObject:item2];
     
     BAItem *item3 = [[BAItem alloc] init];
     item3.itemName = @"Read Textbook";
-    item3.note = @"Textbook note";
+    item3.thisTimeNote = @"Textbook note";
     [sharedManager.toDoItems addObject:item3];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //bamodel.toDoItems = [ [NSMutableArray alloc] init];
     sharedManager = [BAModel sharedManager];
     [self loadInitialData];
 }
@@ -64,13 +63,13 @@
     return [sharedManager.toDoItems count];
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"showItemNote"]) {
-//        NSLog(@"%@", [self.tableView indexPathForSelectedRow]);
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        AddNoteViewController *destViewController = segue.destinationViewController;
-        destViewController.toDoItem = [sharedManager.toDoItems objectAtIndex:[indexPath row]];
-    }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    sharedManager.activeItem = indexPath;
+}
+
+- (IBAction)unwindToMainMenu:(UIStoryboardSegue*)sender
+{
+        [self.tableView reloadData];
 }
 
 
@@ -85,6 +84,7 @@
     }
     
     BAItem *toDoItem = [sharedManager.toDoItems objectAtIndex: indexPath.row];
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size: 18];
     cell.textLabel.text = toDoItem.itemName;
     
     return cell;

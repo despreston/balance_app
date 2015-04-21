@@ -7,11 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BAItem.h"
 
 @interface AddNoteViewController : UIViewController
 
-@property (nonatomic, strong) BAItem *toDoItem;
 @property (weak, nonatomic) IBOutlet UITextView *itemNote;
+- (IBAction)save:(id)sender;
+@property (strong, nonatomic) IBOutlet UITextField *activityName;
+@property (strong, nonatomic) IBOutlet UILabel *activityLabel;
+@property (strong, nonatomic) IBOutlet UILabel *ThisTimeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *NextTimeLabel;
+@property (strong, nonatomic) IBOutlet UIScrollView *ScrollView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *keyboardHeight;
+@property (strong, nonatomic) IBOutlet UITextView *futureItemNote;
 
 @end

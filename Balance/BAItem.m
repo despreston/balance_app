@@ -11,6 +11,7 @@
 @implementation BAItem
 
 @synthesize itemName;
-@synthesize note;
+@synthesize thisTimeNote;
+@synthesize nextTimeNote;
 
 @end

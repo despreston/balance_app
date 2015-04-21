@@ -10,9 +10,11 @@
 
 @interface BAModel : NSObject {
     NSMutableArray *toDoItems;
+    NSIndexPath *activeItem;
 }
 
 @property (nonatomic, retain) NSMutableArray *toDoItems;
+@property (nonatomic, retain) NSIndexPath *activeItem;
 
 + (id)sharedManager;
 

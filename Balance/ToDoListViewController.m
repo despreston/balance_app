@@ -23,7 +23,6 @@
 @synthesize tableView = _tableView;
 
 - (void)loadInitialData {
-    
     BAItem *item1 = [[BAItem alloc] init];
     item1.itemName = @"Buy Milk";
     item1.thisTimeNote = @"Testing the note for the buy milk item";
@@ -72,7 +71,6 @@
         [self.tableView reloadData];
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     static NSString *simpleTableIdentifier = @"ToDoItemCell";
@@ -90,7 +88,6 @@
     return cell;
 }
 
-
 - (void)tableView:(UITableView *)tableView
 commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -99,6 +96,11 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
         [sharedManager.toDoItems removeObjectAtIndex:[indexPath row]];
         [tableView reloadData];
     }
+}
+
+- (void)AddItem:(id)sender {
+    sharedManager.activeItem = nil;
+    [self performSegueWithIdentifier:@"showItemNote" sender:self];
 }
 
 @end

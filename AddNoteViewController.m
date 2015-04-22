@@ -18,26 +18,29 @@
 @implementation AddNoteViewController {
     BAModel *sharedManager;
     BAItem *loadedItem;
-    NSObject *activeField;
 }
 
 @synthesize itemNote;
 @synthesize futureItemNote;
+@synthesize activityName;
 @synthesize ScrollView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     sharedManager = [BAModel sharedManager];
     
-    loadedItem = [[sharedManager toDoItems] objectAtIndex:[[sharedManager activeItem] row]];
+    self.itemNote.delegate = self;
+    self.futureItemNote.delegate = self;
+    
+    if ([sharedManager activeItem] != nil) {
+        loadedItem = [[sharedManager toDoItems] objectAtIndex:[[sharedManager activeItem] row]];
+    } else {
+        loadedItem = [[BAItem alloc]init];
+    }
     
     // hide keyboard when clicking outside of textview
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
-    
-    // Move the view if the keyboard is blocking the text field
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
     // populate fields with loadedItem data
     self.itemNote.text = loadedItem.thisTimeNote;
@@ -70,45 +73,34 @@
     loadedItem.thisTimeNote = self.itemNote.text;
     loadedItem.itemName = self.activityName.text;
     loadedItem.nextTimeNote = self.futureItemNote.text;
-    [[sharedManager toDoItems] replaceObjectAtIndex:[[sharedManager activeItem] row] withObject:loadedItem];
+    
+    if (sharedManager.activeItem == nil) {
+        [[sharedManager toDoItems] addObject:loadedItem];
+    }
+    else if (sharedManager.activeItem != nil) {
+        [[sharedManager toDoItems] replaceObjectAtIndex:[[sharedManager activeItem] row] withObject:loadedItem];
+    }
+    
     [self performSegueWithIdentifier:@"unwindToMainMenu" sender:self];
 }
 
-
-- (void)keyboardWillShow:(NSNotification *)notification
-{
-    NSDictionary *info = [notification userInfo];
-    NSValue *kbFrame = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
-    NSTimeInterval animationDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    CGRect keyboardFrame = [kbFrame CGRectValue];
-    
-    self.keyboardHeight.constant = keyboardFrame.size.height;
-    
-    [UIView animateWithDuration:animationDuration animations:^{
-        [self.view layoutIfNeeded];
-    }];
+- (IBAction)activityNameInputChange:(id)sender {
+    [self checkForDirty];
 }
 
-- (void)keyboardWillHide:(NSNotification *)notification
-{
-    NSDictionary *info = [notification userInfo];
-    NSTimeInterval animationDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    
-    self.keyboardHeight.constant = 20;
-    [UIView animateWithDuration:animationDuration animations:^{
-        [self.view layoutIfNeeded];
-    }];
+- (void)textViewDidChange:(UITextView *)textView {
+    [self checkForDirty];
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    activeField = textField;
+- (void)checkForDirty {
+    // make sure the activity name is not blank before checking for dirty fields
+    if (![self.activityName.text isEqual:@""]) {
+        if (![self.activityName.text isEqual:loadedItem.itemName] || ![self.itemNote.text isEqual:loadedItem.thisTimeNote] || ![self.futureItemNote.text isEqual:loadedItem.nextTimeNote]) {
+            self.SaveButton.enabled = YES;
+        }
+    } else {
+        self.SaveButton.enabled = NO;
+    }
 }
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    activeField = nil;
-}
-
 
 @end

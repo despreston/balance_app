@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		480E3C341AE7F10100B16F7D /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 480E3C331AE7F10100B16F7D /* TPKeyboardAvoidingScrollView.m */; };
+		480E3C371AE7F3B700B16F7D /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 480E3C361AE7F3B700B16F7D /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
 		484742581AD853D4000E58FF /* BANavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 484742571AD853D4000E58FF /* BANavigationController.m */; };
 		486037991AE171430032B5C9 /* HelveticaNeue.dfont in Resources */ = {isa = PBXBuildFile; fileRef = 486037981AE171430032B5C9 /* HelveticaNeue.dfont */; };
 		486A940B1A929E5B00D6785E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 486A940A1A929E5B00D6785E /* main.m */; };
@@ -32,6 +34,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		480E3C321AE7F10100B16F7D /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
+		480E3C331AE7F10100B16F7D /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
+		480E3C351AE7F3B700B16F7D /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
+		480E3C361AE7F3B700B16F7D /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
 		484742561AD853D4000E58FF /* BANavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BANavigationController.h; sourceTree = "<group>"; };
 		484742571AD853D4000E58FF /* BANavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BANavigationController.m; sourceTree = "<group>"; };
 		486037981AE171430032B5C9 /* HelveticaNeue.dfont */ = {isa = PBXFileReference; lastKnownFileType = file; path = HelveticaNeue.dfont; sourceTree = "<group>"; };
@@ -120,6 +126,10 @@
 				484742571AD853D4000E58FF /* BANavigationController.m */,
 				4874374B1ADDA994002AB0F0 /* BAItem.h */,
 				4874374C1ADDA994002AB0F0 /* BAItem.m */,
+				480E3C321AE7F10100B16F7D /* TPKeyboardAvoidingScrollView.h */,
+				480E3C331AE7F10100B16F7D /* TPKeyboardAvoidingScrollView.m */,
+				480E3C351AE7F3B700B16F7D /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
+				480E3C361AE7F3B700B16F7D /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
 			);
 			path = Balance;
 			sourceTree = "<group>";
@@ -253,8 +263,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				486A940E1A929E5B00D6785E /* AppDelegate.m in Sources */,
+				480E3C341AE7F10100B16F7D /* TPKeyboardAvoidingScrollView.m in Sources */,
 				486A94361A92E70100D6785E /* BAModel.m in Sources */,
 				486A94331A92D19100D6785E /* ToDoListViewController.m in Sources */,
+				480E3C371AE7F3B700B16F7D /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				486A940B1A929E5B00D6785E /* main.m in Sources */,
 				4874374D1ADDA994002AB0F0 /* BAItem.m in Sources */,
 				486A94301A92D0E000D6785E /* AddNoteViewController.m in Sources */,

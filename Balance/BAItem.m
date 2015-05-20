@@ -13,5 +13,6 @@
 @synthesize itemName;
 @synthesize thisTimeNote;
 @synthesize nextTimeNote;
+@synthesize lastUpdate;
 
 @end

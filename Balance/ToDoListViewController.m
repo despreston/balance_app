@@ -26,22 +26,29 @@
     BAItem *item1 = [[BAItem alloc] init];
     item1.itemName = @"Buy Milk";
     item1.thisTimeNote = @"Testing the note for the buy milk item";
+    item1.lastUpdate = [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
     [sharedManager.toDoItems addObject:item1];
     
     BAItem *item2 = [[BAItem alloc] init];
     item2.itemName = @"Do Homework";
     item2.thisTimeNote = @"Homework note";
+    item2.lastUpdate = [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
     [sharedManager.toDoItems addObject:item2];
     
     BAItem *item3 = [[BAItem alloc] init];
     item3.itemName = @"Read Textbook";
     item3.thisTimeNote = @"Textbook note";
+    item3.lastUpdate = [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
     [sharedManager.toDoItems addObject:item3];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     sharedManager = [BAModel sharedManager];
+    
+    // set the back button to be blank
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
     [self loadInitialData];
 }
 
@@ -78,12 +85,13 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:simpleTableIdentifier];
     }
     
     BAItem *toDoItem = [sharedManager.toDoItems objectAtIndex: indexPath.row];
-    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size: 18];
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size: 18];
     cell.textLabel.text = toDoItem.itemName;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Last Updated: %@", toDoItem.lastUpdate];
     
     return cell;
 }

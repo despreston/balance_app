@@ -21,6 +21,8 @@
 		486A94331A92D19100D6785E /* ToDoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 486A94321A92D19100D6785E /* ToDoListViewController.m */; };
 		486A94361A92E70100D6785E /* BAModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 486A94351A92E70100D6785E /* BAModel.m */; };
 		4874374D1ADDA994002AB0F0 /* BAItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4874374C1ADDA994002AB0F0 /* BAItem.m */; };
+		4878CD3A1B0D4D7D009935C3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4878CD391B0D4D7D009935C3 /* CoreData.framework */; };
+		48DA22C31B09FB7C00B98D6D /* BalanceItem.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 48DA22C11B09FB7C00B98D6D /* BalanceItem.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,8 @@
 		486A94351A92E70100D6785E /* BAModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAModel.m; sourceTree = "<group>"; };
 		4874374B1ADDA994002AB0F0 /* BAItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAItem.h; sourceTree = "<group>"; };
 		4874374C1ADDA994002AB0F0 /* BAItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAItem.m; sourceTree = "<group>"; };
+		4878CD391B0D4D7D009935C3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		48DA22C21B09FB7C00B98D6D /* BalanceItem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BalanceItem.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4878CD3A1B0D4D7D009935C3 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +96,7 @@
 		486A93FC1A929E5B00D6785E = {
 			isa = PBXGroup;
 			children = (
+				4878CD391B0D4D7D009935C3 /* CoreData.framework */,
 				486A94071A929E5B00D6785E /* Balance */,
 				486A94211A929E5B00D6785E /* BalanceTests */,
 				486A94061A929E5B00D6785E /* Products */,
@@ -109,6 +115,7 @@
 		486A94071A929E5B00D6785E /* Balance */ = {
 			isa = PBXGroup;
 			children = (
+				48DA22C11B09FB7C00B98D6D /* BalanceItem.xcdatamodeld */,
 				486037971AE1701D0032B5C9 /* Resources */,
 				486A942E1A92D0E000D6785E /* AddNoteViewController.h */,
 				486A942F1A92D0E000D6785E /* AddNoteViewController.m */,
@@ -271,6 +278,7 @@
 				4874374D1ADDA994002AB0F0 /* BAItem.m in Sources */,
 				486A94301A92D0E000D6785E /* AddNoteViewController.m in Sources */,
 				484742581AD853D4000E58FF /* BANavigationController.m in Sources */,
+				48DA22C31B09FB7C00B98D6D /* BalanceItem.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,6 +481,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		48DA22C11B09FB7C00B98D6D /* BalanceItem.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				48DA22C21B09FB7C00B98D6D /* BalanceItem.xcdatamodel */,
+			);
+			currentVersion = 48DA22C21B09FB7C00B98D6D /* BalanceItem.xcdatamodel */;
+			path = BalanceItem.xcdatamodeld;
+			sourceTree = SOURCE_ROOT;
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 486A93FD1A929E5B00D6785E /* Project object */;
 }

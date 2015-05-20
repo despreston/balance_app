@@ -13,5 +13,6 @@
 @property (nonatomic) NSString *itemName;
 @property (nonatomic) NSString *thisTimeNote;
 @property (nonatomic) NSString *nextTimeNote;
+@property (nonatomic) NSString *lastUpdate;
 
 @end

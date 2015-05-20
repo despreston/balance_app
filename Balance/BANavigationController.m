@@ -25,7 +25,7 @@
       NSForegroundColorAttributeName,
       [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
       NSForegroundColorAttributeName,
-      [UIFont fontWithName:@"Helvetica Neue Medium" size:0.0],
+      [UIFont fontWithName:@"Helvetica Neue Medium" size:3.0],
       NSFontAttributeName,
       nil]];
     

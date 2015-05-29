@@ -13,6 +13,7 @@
 - (IBAction)save:(id)sender;
 - (IBAction)activityNameInputChange:(id)sender;
 
+@property (strong) NSManagedObject *item;
 @property (weak, nonatomic) IBOutlet UITextView *itemNote;
 @property (strong, nonatomic) IBOutlet UITextField *activityName;
 @property (strong, nonatomic) IBOutlet UILabel *ThisTimeLabel;

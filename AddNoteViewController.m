@@ -10,30 +10,35 @@
 #import "AddNoteViewController.h"
 #import "BAModel.h"
 #import "BAItem.h"
+#import <CoreData/CoreData.h>
 
 @interface AddNoteViewController ()
-
 @end
 
-@implementation AddNoteViewController {
-    BAModel *sharedManager;
-    BAItem *loadedItem;
+@implementation AddNoteViewController
+@synthesize item;
+
+
+- (NSManagedObjectContext *)managedObjectContext {
+    NSManagedObjectContext *context = nil;
+    id delegate = [[UIApplication sharedApplication] delegate];
+    if ([delegate performSelector:@selector(managedObjectContext)]) {
+        context = [delegate managedObjectContext];
+    }
+    return context;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    sharedManager = [BAModel sharedManager];
+    
+    if (self.item) {
+        [self.activityName setText:[self.item valueForKey:@"name"]];
+        [self.itemNote setText:[self.item valueForKey:@"thisTimeNote"]];
+        [self.futureItemNote setText:[self.item valueForKey:@"nextTimeNote"]];
+    }
     
     self.itemNote.delegate = self;
     self.futureItemNote.delegate = self;
-    
-    // either load data from todoItems or if its a new item, initialize it.
-    if ([sharedManager activeItem] != nil) {
-        loadedItem = [[sharedManager toDoItems] objectAtIndex:[[sharedManager activeItem] row]];
-    } else {
-        loadedItem = [[BAItem alloc]init];
-        [self.activityName becomeFirstResponder];
-    }
     
     UITapGestureRecognizer *thisTimeClearButtonTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clearThisTime)];
     [self.ThisTimeClearButton addGestureRecognizer:thisTimeClearButtonTap];
@@ -46,15 +51,10 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
     
-    // populate fields with loadedItem data
-    self.itemNote.text = loadedItem.thisTimeNote;
-    self.futureItemNote.text = loadedItem.nextTimeNote;
-    self.activityName.text = loadedItem.itemName;
-    
     // Set Styles
-    self.activityName.font = [UIFont fontWithName:@"HelveticaNeue" size: 17];
-    self.ThisTimeLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size: 17];
-    self.NextTimeLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size: 17];
+    self.activityName.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size: 18];
+    self.ThisTimeLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size: 18];
+    self.NextTimeLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size: 18];
     
     self.itemNote.layer.borderWidth = 1.0f;
     self.itemNote.layer.borderColor = [[UIColor lightGrayColor] CGColor];
@@ -113,8 +113,8 @@
 
 }
 
-- (void) clearThisTime {
-    self.itemNote.text = @"";
+- (IBAction)cancel:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)dismissKeyboard {
@@ -122,19 +122,30 @@
 }
 
 - (IBAction)save:(id)sender {
-    loadedItem.thisTimeNote = self.itemNote.text;
-    loadedItem.itemName = self.activityName.text;
-    loadedItem.nextTimeNote = self.futureItemNote.text;
-    loadedItem.lastUpdate = [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+    NSManagedObjectContext *context = [self managedObjectContext];
     
-    if (sharedManager.activeItem == nil) {
-        [[sharedManager toDoItems] addObject:loadedItem];
-    }
-    else if (sharedManager.activeItem != nil) {
-        [[sharedManager toDoItems] replaceObjectAtIndex:[[sharedManager activeItem] row] withObject:loadedItem];
+    // Edit existing item
+    if (self.item) {
+        [self.item setValue:self.activityName.text forKey:@"name"];
+        [self.item setValue:self.itemNote.text forKey:@"thisTimeNote"];
+        [self.item setValue:self.futureItemNote.text forKey:@"nextTimeNote"];
+    } else {
+        // Create a new item
+        NSManagedObject *newItem = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:context];
+        [newItem setValue:[NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle] forKey:@"lastUpdate"];
+        [newItem setValue:self.activityName.text forKey:@"name"];
+        [newItem setValue:self.futureItemNote.text forKey:@"nextTimeNote"];
+        [newItem setValue:self.itemNote.text forKey:@"thisTimeNote"];
     }
     
-    [self performSegueWithIdentifier:@"unwindToMainMenu" sender:self];
+    NSError *error = nil;
+    // Save the object to persistent store
+    if (![context save:&error]) {
+        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+    }
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 - (IBAction)activityNameInputChange:(id)sender {
@@ -149,9 +160,9 @@
 - (void)checkForDirty {
     // make sure the activity name is not blank before checking for dirty fields
     if (![self.activityName.text isEqual:@""]) {
-        if (![self.activityName.text isEqual:loadedItem.itemName] || ![self.itemNote.text isEqual:loadedItem.thisTimeNote] || ![self.futureItemNote.text isEqual:loadedItem.nextTimeNote]) {
+//        if (![self.activityName.text isEqual:loadedItem.itemName] || ![self.itemNote.text isEqual:loadedItem.thisTimeNote] || ![self.futureItemNote.text isEqual:loadedItem.nextTimeNote]) {
             self.SaveButton.enabled = YES;
-        }
+       // }
     } else {
         self.SaveButton.enabled = NO;
     }

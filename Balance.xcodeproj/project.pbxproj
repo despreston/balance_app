@@ -22,6 +22,7 @@
 		486A94361A92E70100D6785E /* BAModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 486A94351A92E70100D6785E /* BAModel.m */; };
 		4874374D1ADDA994002AB0F0 /* BAItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4874374C1ADDA994002AB0F0 /* BAItem.m */; };
 		4878CD3A1B0D4D7D009935C3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4878CD391B0D4D7D009935C3 /* CoreData.framework */; };
+		4878CD3D1B0D5DB6009935C3 /* Prefix.pch in Sources */ = {isa = PBXBuildFile; fileRef = 4878CD3B1B0D5C0F009935C3 /* Prefix.pch */; };
 		48DA22C31B09FB7C00B98D6D /* BalanceItem.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 48DA22C11B09FB7C00B98D6D /* BalanceItem.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,7 @@
 		4874374B1ADDA994002AB0F0 /* BAItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BAItem.h; sourceTree = "<group>"; };
 		4874374C1ADDA994002AB0F0 /* BAItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BAItem.m; sourceTree = "<group>"; };
 		4878CD391B0D4D7D009935C3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		4878CD3B1B0D5C0F009935C3 /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		48DA22C21B09FB7C00B98D6D /* BalanceItem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BalanceItem.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,6 +146,7 @@
 		486A94081A929E5B00D6785E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4878CD3B1B0D5C0F009935C3 /* Prefix.pch */,
 				486A94091A929E5B00D6785E /* Info.plist */,
 				486A940A1A929E5B00D6785E /* main.m */,
 			);
@@ -269,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4878CD3D1B0D5DB6009935C3 /* Prefix.pch in Sources */,
 				486A940E1A929E5B00D6785E /* AppDelegate.m in Sources */,
 				480E3C341AE7F10100B16F7D /* TPKeyboardAvoidingScrollView.m in Sources */,
 				486A94361A92E70100D6785E /* BAModel.m in Sources */,
@@ -401,6 +405,10 @@
 		486A94291A929E5B00D6785E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Balance/Prefix.pch;
 				INFOPLIST_FILE = Balance/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Balance;
@@ -410,6 +418,10 @@
 		486A942A1A929E5B00D6785E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Balance/Prefix.pch;
 				INFOPLIST_FILE = Balance/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = Balance;

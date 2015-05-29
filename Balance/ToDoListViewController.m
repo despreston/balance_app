@@ -11,50 +11,56 @@
 #import "BAItem.h"
 #import "AddNoteViewController.h"
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
 @interface ToDoListViewController ()
-
+@property (strong) NSMutableArray *items;
 @end
 
-@implementation ToDoListViewController {
-    BAModel *sharedManager;
-}
+@implementation ToDoListViewController
 
 @synthesize tableView = _tableView;
 
-- (void)loadInitialData {
-    BAItem *item1 = [[BAItem alloc] init];
-    item1.itemName = @"Buy Milk";
-    item1.thisTimeNote = @"Testing the note for the buy milk item";
-    item1.lastUpdate = [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
-    [sharedManager.toDoItems addObject:item1];
+- (NSManagedObjectContext *)managedObjectContext
+{
+    NSManagedObjectContext *context = nil;
+    id delegate = [[UIApplication sharedApplication] delegate];
+    if ([delegate performSelector:@selector(managedObjectContext)]) {
+        context = [delegate managedObjectContext];
+    }
+    return context;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     
-    BAItem *item2 = [[BAItem alloc] init];
-    item2.itemName = @"Do Homework";
-    item2.thisTimeNote = @"Homework note";
-    item2.lastUpdate = [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
-    [sharedManager.toDoItems addObject:item2];
+    // Fetch the devices from persistent data store
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Item"];
+    self.items = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
-    BAItem *item3 = [[BAItem alloc] init];
-    item3.itemName = @"Read Textbook";
-    item3.thisTimeNote = @"Textbook note";
-    item3.lastUpdate = [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
-    [sharedManager.toDoItems addObject:item3];
+    [self.tableView reloadData];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    sharedManager = [BAModel sharedManager];
     
     // set the back button to be blank
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-    
-    [self loadInitialData];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"showItemNote"]) {
+        NSManagedObject *selectedItem = [self.items objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
+        AddNoteViewController *destViewController = segue.destinationViewController;
+        destViewController.item = selectedItem;
+    }
 }
 
 #pragma mark - Table view data source
@@ -65,12 +71,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return [sharedManager.toDoItems count];
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    sharedManager.activeItem = indexPath;
+    return [self.items count];
 }
 
 - (IBAction)unwindToMainMenu:(UIStoryboardSegue*)sender
@@ -80,35 +81,57 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    static NSString *simpleTableIdentifier = @"ToDoItemCell";
+    static NSString *CellIdentifier = @"ToDoItemCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    NSManagedObject *item = [self.items objectAtIndex:indexPath.row];
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size: 18];
+    [cell.textLabel setText:[NSString stringWithFormat:@"%@", [item valueForKey:@"name"]]];
+    [cell.detailTextLabel setText:[NSString stringWithFormat:@"Last Updated: %@", [item valueForKey:@"lastUpdate"]]];
+    
+    // Cell View
+    UIView *cellView = [[UIView alloc]initWithFrame:CGRectMake(0,0, cell.frame.size.width, cell.frame.size.height)];
+    // View for all content in each cell
+    UIView *cellContent = [[UIView alloc]initWithFrame:CGRectMake(5,10, cellView.frame.size.width-10, cellView.frame.size.height-15)];
+    cellContent.layer.borderWidth = 1.0f;
+    cellContent.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    cellContent.layer.cornerRadius = 5;
+
+    [cellView addSubview:cellContent];
+    [cell.contentView addSubview:cellView];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:simpleTableIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-    
-    BAItem *toDoItem = [sharedManager.toDoItems objectAtIndex: indexPath.row];
-    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size: 18];
-    cell.textLabel.text = toDoItem.itemName;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Last Updated: %@", toDoItem.lastUpdate];
     
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView
-commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
-forRowAtIndexPath:(NSIndexPath *)indexPath {
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    
+    [self.tableView beginUpdates];
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        //add code here to do what you want when you hit delete
-        [sharedManager.toDoItems removeObjectAtIndex:[indexPath row]];
-        [tableView reloadData];
+        // Delete object from database
+        [context deleteObject:[self.items objectAtIndex:indexPath.row]];
+        
+        NSError *error = nil;
+        if (![context save:&error]) {
+            NSLog(@"Can't Delete! %@ %@", error, [error localizedDescription]);
+            return;
+        }
+        
+        // Remove item from table view
+        [self.items removeObjectAtIndex:indexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
+    [self.tableView endUpdates];
 }
 
 - (void)AddItem:(id)sender {
-    sharedManager.activeItem = nil;
-    [self performSegueWithIdentifier:@"showItemNote" sender:self];
+    [self performSegueWithIdentifier:@"createNewItem" sender:self];
 }
 
 @end

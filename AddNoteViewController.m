@@ -8,8 +8,6 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "AddNoteViewController.h"
-#import "BAModel.h"
-#import "BAItem.h"
 #import <CoreData/CoreData.h>
 
 @interface AddNoteViewController ()
@@ -95,6 +93,9 @@
 }
 
 - (void) showPlaceholderIfEmpty {
+    self.ThisTimePlaceholder.hidden = YES;
+    self.NextTimePlaceholder.hidden = YES;
+    
     if ([self.itemNote.text isEqual:@""] || self.itemNote.text == nil) {
         self.ThisTimePlaceholder.hidden = NO;
     }
@@ -160,7 +161,6 @@
 - (void)checkForDirty {
     // make sure the activity name is not blank before checking for dirty fields
     if (![self.activityName.text isEqual:@""]) {
-//        if (![self.activityName.text isEqual:loadedItem.itemName] || ![self.itemNote.text isEqual:loadedItem.thisTimeNote] || ![self.futureItemNote.text isEqual:loadedItem.nextTimeNote]) {
             self.SaveButton.enabled = YES;
        // }
     } else {

@@ -7,9 +7,8 @@
 //
 
 #import "ToDoListViewController.h"
-#import "BAModel.h"
-#import "BAItem.h"
 #import "AddNoteViewController.h"
+#import "CustomCell.h"
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
@@ -48,6 +47,10 @@
     
     // set the back button to be blank
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    // register the custom cell
+    [self.tableView registerNib:[UINib nibWithNibName:@"CustomCell" bundle:nil] forCellReuseIdentifier:@"ToDoItemCell"];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -79,15 +82,16 @@
         [self.tableView reloadData];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
+- (CustomCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"ToDoItemCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
+    CustomCell *cell = (CustomCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     NSManagedObject *item = [self.items objectAtIndex:indexPath.row];
-    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size: 18];
-    [cell.textLabel setText:[NSString stringWithFormat:@"%@", [item valueForKey:@"name"]]];
-    [cell.detailTextLabel setText:[NSString stringWithFormat:@"Last Updated: %@", [item valueForKey:@"lastUpdate"]]];
+    
+    // set texts
+    [cell.name setText:[NSString stringWithFormat:@"%@", [item valueForKey:@"name"]]];
+    [cell.lastText setText:[NSString stringWithFormat:@"%@", [item valueForKey:@"thisTimeNote"]]];
+    [cell.nextText setText:[NSString stringWithFormat:@"%@", [item valueForKey:@"nextTimeNote"]]];
+    [cell.lastUpdatedText setText:[NSString stringWithFormat:@"Last Updated: %@", [item valueForKey:@"lastUpdate"]]];
     
     // Cell View
     UIView *cellView = [[UIView alloc]initWithFrame:CGRectMake(0,0, cell.frame.size.width, cell.frame.size.height)];
@@ -100,11 +104,18 @@
     [cellView addSubview:cellContent];
     [cell.contentView addSubview:cellView];
     
+    [cell.lastText setNumberOfLines:0];
+    [cell.lastText sizeToFit];
+    
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[CustomCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"showItemNote" sender:nil];
 }
 
 

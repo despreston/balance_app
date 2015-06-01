@@ -91,7 +91,7 @@
     [cell.name setText:[NSString stringWithFormat:@"%@", [item valueForKey:@"name"]]];
     [cell.lastText setText:[NSString stringWithFormat:@"%@", [item valueForKey:@"thisTimeNote"]]];
     [cell.nextText setText:[NSString stringWithFormat:@"%@", [item valueForKey:@"nextTimeNote"]]];
-    [cell.lastUpdatedText setText:[NSString stringWithFormat:@"Last Updated: %@", [item valueForKey:@"lastUpdate"]]];
+    [cell.lastUpdatedText setText:[NSString stringWithFormat:@"Last Update: %@", [item valueForKey:@"lastUpdate"]]];
     
     // Cell View
     UIView *cellView = [[UIView alloc]initWithFrame:CGRectMake(0,0, cell.frame.size.width, cell.frame.size.height)];

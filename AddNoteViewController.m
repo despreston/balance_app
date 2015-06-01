@@ -130,6 +130,8 @@
         [self.item setValue:self.activityName.text forKey:@"name"];
         [self.item setValue:self.itemNote.text forKey:@"thisTimeNote"];
         [self.item setValue:self.futureItemNote.text forKey:@"nextTimeNote"];
+        [self.item setValue:[NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle] forKey:@"lastUpdate"];
+
     } else {
         // Create a new item
         NSManagedObject *newItem = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:context];

@@ -95,14 +95,17 @@
     
     // Cell View
     UIView *cellView = [[UIView alloc]initWithFrame:CGRectMake(0,0, cell.frame.size.width, cell.frame.size.height)];
+    
     // View for all content in each cell
     UIView *cellContent = [[UIView alloc]initWithFrame:CGRectMake(5,10, cellView.frame.size.width-10, cellView.frame.size.height-15)];
-    cellContent.layer.borderWidth = 1.0f;
-    cellContent.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    cellContent.layer.borderWidth = 0.8f;
+    cellContent.layer.borderColor = [[UIColor colorWithRed:215.0f/255.0f green:215.0f/255.0f blue:215.0f/255.0f alpha:1.0] CGColor];
     cellContent.layer.cornerRadius = 5;
+    [cellContent setBackgroundColor:[UIColor colorWithRed:253.0f/255.0f green:253.0f/255.0f blue:253.0f/255.0f alpha:1.0]];
 
     [cellView addSubview:cellContent];
-    [cell.contentView addSubview:cellView];
+//    [cell.contentView addSubview:cellView];
+    [cell.contentView insertSubview:cellView atIndex:0];
     
     [cell.lastText setNumberOfLines:0];
     [cell.lastText sizeToFit];

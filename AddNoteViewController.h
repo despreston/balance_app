@@ -8,21 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddNoteViewController : UIViewController <UITextViewDelegate>
+@interface AddNoteViewController : UIViewController
 
 - (IBAction)save:(id)sender;
+- (IBAction)editNoteButtonPressed:(id)sender;
 - (IBAction)activityNameInputChange:(id)sender;
 
 @property (strong) NSManagedObject *item;
-@property (weak, nonatomic) IBOutlet UITextView *itemNote;
+@property (weak, nonatomic) IBOutlet UILabel *itemNote;
 @property (strong, nonatomic) IBOutlet UITextField *activityName;
 @property (strong, nonatomic) IBOutlet UILabel *ThisTimeLabel;
 @property (strong, nonatomic) IBOutlet UILabel *NextTimeLabel;
 @property (strong, nonatomic) IBOutlet UIScrollView *ScrollView;
-@property (strong, nonatomic) IBOutlet UITextView *futureItemNote;
+@property (strong, nonatomic) IBOutlet UILabel *futureItemNote;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *SaveButton;
-@property (strong, nonatomic) IBOutlet UILabel *ThisTimeClearButton;
-@property (strong, nonatomic) IBOutlet UILabel *NextTimeClearButton;
-@property (strong, nonatomic) IBOutlet UILabel *ThisTimePlaceholder;
-@property (strong, nonatomic) IBOutlet UILabel *NextTimePlaceholder;
+@property (strong, nonatomic) IBOutlet UIButton *addThisTimeNote;
+@property (strong, nonatomic) IBOutlet UIButton *addNextTimeNote;
 @end

@@ -8,13 +8,16 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "AddNoteViewController.h"
+#import "EditorViewController.h"
 #import <CoreData/CoreData.h>
 
-@interface AddNoteViewController ()
+@interface AddNoteViewController()
 @end
 
 @implementation AddNoteViewController
 @synthesize item;
+@synthesize itemNote;
+@synthesize futureItemNote;
 
 
 - (NSManagedObjectContext *)managedObjectContext {
@@ -33,13 +36,14 @@
         [self.activityName setText:[self.item valueForKey:@"name"]];
         [self.itemNote setText:[self.item valueForKey:@"thisTimeNote"]];
         [self.futureItemNote setText:[self.item valueForKey:@"nextTimeNote"]];
+        [self.itemNote setTextColor:[UIColor darkGrayColor]];
+        [self.futureItemNote setTextColor:[UIColor darkGrayColor]];
+    } else {
+        [self.activityName becomeFirstResponder];
     }
     
-    self.itemNote.delegate = self;
-    self.futureItemNote.delegate = self;
-    
-    UITapGestureRecognizer *thisTimeClearButtonTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clearThisTime)];
-    [self.ThisTimeClearButton addGestureRecognizer:thisTimeClearButtonTap];
+    // Create and style the 2 main buttons at the top
+    [self createNoteButtons];
     
     // Activity name notification
     [self.activityName addTarget:self action:@selector(activityNameSelected)forControlEvents:UIControlEventEditingDidBegin];
@@ -49,28 +53,30 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
     
-    // Set Styles
-    self.activityName.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size: 18];
-    self.ThisTimeLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size: 18];
-    self.NextTimeLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size: 18];
-    
-    self.itemNote.layer.borderWidth = 1.0f;
-    self.itemNote.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    self.itemNote.layer.cornerRadius = 5;
-    self.itemNote.font = [UIFont fontWithName:@"HelveticaNeue" size: 16];
-    
-    self.futureItemNote.layer.borderWidth = 1.0f;
-    self.futureItemNote.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    self.futureItemNote.layer.cornerRadius = 5;
-    self.futureItemNote.font = [UIFont fontWithName:@"HelveticaNeue" size: 16];
-    
-    self.ThisTimeClearButton.hidden = YES;
-    self.NextTimeClearButton.hidden = YES;
-    self.ThisTimePlaceholder.hidden = YES;
-    self.NextTimePlaceholder.hidden = YES;
-    
     [self showPlaceholderIfEmpty];
+}
+
+- (void) createNoteButtons {
+    // This Time note
+    CGRect addThisTimeNoteFrame = self.addThisTimeNote.frame;
+    addThisTimeNoteFrame.size = CGSizeMake(160, 55);
+    self.addThisTimeNote.frame = addThisTimeNoteFrame;
+    [self.addThisTimeNote setTitle:@"I Did Work" forState:UIControlStateNormal];
+    self.addThisTimeNote.center = CGPointMake(85,75);
+    [self.addThisTimeNote setBackgroundColor:[UIColor colorWithRed:46.0f/255.0f green:148.0f/255.0f blue:227.0f/255.0f alpha:1.0]];
+    [self.addThisTimeNote setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.addThisTimeNote.layer.cornerRadius = 3;
     
+    // Next Time note
+    CGRect addNextTimeNoteFrame = self.addNextTimeNote.frame;
+    addNextTimeNoteFrame.size = CGSizeMake(160, 55);
+    self.addNextTimeNote.frame = addThisTimeNoteFrame;
+    [self.addNextTimeNote setTitle:@"Note to Remember" forState:UIControlStateNormal];
+    self.addNextTimeNote.center = CGPointMake(185,75);
+    [self.addNextTimeNote setBackgroundColor:[UIColor colorWithRed:46.0f/255.0f green:148.0f/255.0f blue:227.0f/255.0f alpha:1.0]];
+    [self.addNextTimeNote setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.addNextTimeNote.layer.cornerRadius = 3;
+
 }
 
 - (void) activityNameSelected {
@@ -81,37 +87,15 @@
     self.activityName.textAlignment = NSTextAlignmentCenter;
 }
 
-- (void) textViewDidBeginEditing:(UITextView *)textView {
-    // Show correct clear button
-    if (textView == self.itemNote) {
-        self.ThisTimePlaceholder.hidden = YES;
-        self.ThisTimeClearButton.hidden = NO;
-    } else if (textView == self.futureItemNote) {
-        self.NextTimePlaceholder.hidden = YES;
-        self.NextTimeClearButton.hidden = NO;
-    }
-}
-
 - (void) showPlaceholderIfEmpty {
-    self.ThisTimePlaceholder.hidden = YES;
-    self.NextTimePlaceholder.hidden = YES;
-    
     if ([self.itemNote.text isEqual:@""] || self.itemNote.text == nil) {
-        self.ThisTimePlaceholder.hidden = NO;
+        self.itemNote.text = @"Tap 'I Did Work' to add what you last did.";
+        [self.itemNote setTextColor:[UIColor lightGrayColor]];
     }
     if ([self.futureItemNote.text isEqual:@""] || self.futureItemNote.text == nil) {
-        self.NextTimePlaceholder.hidden = NO;
+        self.futureItemNote.text = @"Tap 'Note to Remember' to leave a note for next time.";
+        [self.futureItemNote setTextColor:[UIColor lightGrayColor]];
     }
-}
-
-- (void) textViewDidEndEditing:(UITextView *)textView {
-    // hide clear buttons and placeholders when done editing
-    
-    self.ThisTimeClearButton.hidden = YES;
-    self.NextTimeClearButton.hidden = YES;
-    
-    [self showPlaceholderIfEmpty];
-
 }
 
 - (IBAction)cancel:(id)sender {
@@ -120,6 +104,21 @@
 
 - (void)dismissKeyboard {
     [self.view endEditing:YES];
+}
+
+- (IBAction)editNoteButtonPressed:(id)sender {
+    [self performSegueWithIdentifier:@"editNote" sender:sender];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    UIButton *pressedButton = (UIButton *)sender;
+    EditorViewController *destViewController = segue.destinationViewController;
+    
+    if ([pressedButton.titleLabel.text isEqualToString:self.addThisTimeNote.titleLabel.text]) {
+        destViewController.passedNote = self.itemNote.text;
+    } else if ([pressedButton.titleLabel.text isEqualToString:self.addNextTimeNote.titleLabel.text]) {
+        destViewController.passedNote = self.futureItemNote.text;
+    }
 }
 
 - (IBAction)save:(id)sender {
@@ -152,11 +151,6 @@
 }
 
 - (IBAction)activityNameInputChange:(id)sender {
-    [self checkForDirty];
-}
-
-- (void)textViewDidChange:(UITextView *)textView {
-    [self showPlaceholderIfEmpty];
     [self checkForDirty];
 }
 

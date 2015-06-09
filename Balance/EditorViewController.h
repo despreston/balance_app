@@ -12,10 +12,11 @@
 
 - (IBAction)Done:(id)sender;
 - (IBAction)ClearButtonPressed:(id)sender;
+@property (strong, nonatomic) NSManagedObject *item;
 @property (strong, nonatomic) IBOutlet UIButton *Cancel;
 @property (strong, nonatomic) IBOutlet UITextView *note;
 @property (strong, nonatomic) IBOutlet UIButton *Done;
-@property (strong, nonatomic) NSString *passedNote;
+@property (strong, nonatomic) NSString *noteToEdit;
 @property (strong, nonatomic) IBOutlet UIButton *ClearButton;
 
 

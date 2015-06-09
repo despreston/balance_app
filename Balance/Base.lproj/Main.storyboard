@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wcq-U3-OLr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wcq-U3-OLr">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -86,7 +86,14 @@
                                 <rect key="frame" x="245" y="18" width="66" height="38"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="Save">
+                                    <color key="titleColor" red="0.54775273310000006" green="0.74832307450000002" blue="0.31942578329999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="disabled">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected">
+                                    <color key="titleColor" red="0.54775273310000006" green="0.74832307450000002" blue="0.31942578329999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="Done:" destination="dYZ-X5-iIa" eventType="touchUpInside" id="CaO-CB-1e9"/>
@@ -140,7 +147,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="See-cU-ZW7" customClass="TPKeyboardAvoidingScrollView">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="See-cU-ZW7" customClass="TPKeyboardAvoidingScrollView">
                                 <rect key="frame" x="0.0" y="-66" width="320" height="626"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Here's where you left off:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FnA-q3-DoS">
@@ -188,7 +195,7 @@
                                             <constraint firstAttribute="width" constant="150" id="xxN-LL-xka"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                        <state key="normal" title="Note to Remember">
+                                        <state key="normal" title="Note for Future">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -198,6 +205,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oe1-d9-M9a">
                                         <rect key="frame" x="282" y="174" width="30" height="31"/>
                                         <state key="normal" title="Button" image="detail-icon.png">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
@@ -216,18 +224,22 @@
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" placeholder="Activity Name" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="NXy-s1-6dS">
-                                        <rect key="frame" x="24" y="67" width="272" height="38"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Activity Name" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="NXy-s1-6dS">
+                                        <rect key="frame" x="24" y="72" width="272" height="42"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="38" id="e9h-Zt-ar1"/>
+                                            <constraint firstAttribute="height" constant="42" id="e9h-Zt-ar1"/>
                                         </constraints>
                                         <color key="textColor" red="0.21176470588235294" green="0.40000000000000002" blue="0.83921568627450982" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
-                                        <connections>
-                                            <action selector="activityNameInputChange:" destination="BYZ-38-t0r" eventType="editingChanged" id="pqi-cI-Sge"/>
-                                        </connections>
                                     </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nmf-wL-TUf">
+                                        <rect key="frame" x="0.0" y="165" width="320" height="1"/>
+                                        <color key="backgroundColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="ge2-EP-Af3" firstAttribute="baseline" secondItem="5u5-8B-Stv" secondAttribute="firstBaseline" id="5gz-Qw-1bL"/>
@@ -245,7 +257,7 @@
                                     <constraint firstItem="JnT-Xi-Q01" firstAttribute="top" secondItem="1tv-DX-X2j" secondAttribute="bottom" constant="17" id="QuE-Qf-9Pp"/>
                                     <constraint firstItem="NXy-s1-6dS" firstAttribute="centerX" secondItem="See-cU-ZW7" secondAttribute="centerX" id="SgJ-y4-1gx"/>
                                     <constraint firstItem="5u5-8B-Stv" firstAttribute="trailing" secondItem="See-cU-ZW7" secondAttribute="trailingMargin" id="TDq-sL-RHw"/>
-                                    <constraint firstItem="NXy-s1-6dS" firstAttribute="top" secondItem="See-cU-ZW7" secondAttribute="top" constant="67" id="UGv-9F-eUC"/>
+                                    <constraint firstItem="NXy-s1-6dS" firstAttribute="top" secondItem="See-cU-ZW7" secondAttribute="top" constant="72" id="UGv-9F-eUC"/>
                                     <constraint firstItem="ge2-EP-Af3" firstAttribute="top" secondItem="5u5-8B-Stv" secondAttribute="top" id="UW1-J7-EFe"/>
                                     <constraint firstItem="1tv-DX-X2j" firstAttribute="leading" secondItem="See-cU-ZW7" secondAttribute="leadingMargin" id="eMi-5H-VJd"/>
                                     <constraint firstItem="JnT-Xi-Q01" firstAttribute="leading" secondItem="See-cU-ZW7" secondAttribute="leading" constant="8" id="eXr-vw-MZG"/>
@@ -256,7 +268,7 @@
                                     <constraint firstItem="5u5-8B-Stv" firstAttribute="leading" secondItem="ge2-EP-Af3" secondAttribute="trailing" constant="4" id="p1Q-r0-snG"/>
                                     <constraint firstAttribute="trailing" secondItem="JnT-Xi-Q01" secondAttribute="trailing" constant="17" id="pUB-bN-TLM"/>
                                     <constraint firstItem="FnA-q3-DoS" firstAttribute="top" secondItem="ge2-EP-Af3" secondAttribute="bottom" constant="22" id="rHe-TS-YPV"/>
-                                    <constraint firstItem="ge2-EP-Af3" firstAttribute="top" secondItem="NXy-s1-6dS" secondAttribute="bottom" constant="11" id="zyh-iL-2eR"/>
+                                    <constraint firstItem="ge2-EP-Af3" firstAttribute="top" secondItem="NXy-s1-6dS" secondAttribute="bottom" constant="2" id="zyh-iL-2eR"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -272,18 +284,12 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Details" id="4fx-X3-B5Z">
                         <barButtonItem key="backBarButtonItem" title="&lt;" id="ITe-M2-3zt"/>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="save" id="P5Z-Dl-9ix">
-                            <connections>
-                                <action selector="save:" destination="BYZ-38-t0r" id="zsK-0K-1Pu"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="NextTimeLabel" destination="1tv-DX-X2j" id="lLU-aN-KLV"/>
-                        <outlet property="SaveButton" destination="P5Z-Dl-9ix" id="rsU-Se-bX2"/>
                         <outlet property="ScrollView" destination="See-cU-ZW7" id="Hxc-XU-GuJ"/>
                         <outlet property="ThisTimeLabel" destination="FnA-q3-DoS" id="4lL-UM-aoM"/>
                         <outlet property="activityName" destination="NXy-s1-6dS" id="Apk-67-YE2"/>

@@ -53,11 +53,6 @@
 
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showItemNote"]) {
         NSManagedObject *selectedItem = [self.items objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
@@ -77,10 +72,10 @@
     return [self.items count];
 }
 
-- (IBAction)unwindToMainMenu:(UIStoryboardSegue*)sender
-{
-        [self.tableView reloadData];
-}
+//- (IBAction)unwindToMainMenu:(UIStoryboardSegue*)sender
+//{
+//        [self.tableView reloadData];
+//}
 
 - (CustomCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"ToDoItemCell";
@@ -103,8 +98,8 @@
     cellContent.layer.cornerRadius = 5;
     [cellContent setBackgroundColor:[UIColor colorWithRed:253.0f/255.0f green:253.0f/255.0f blue:253.0f/255.0f alpha:1.0]];
 
+    // Add views
     [cellView addSubview:cellContent];
-//    [cell.contentView addSubview:cellView];
     [cell.contentView insertSubview:cellView atIndex:0];
     
     [cell.lastText setNumberOfLines:0];

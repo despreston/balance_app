@@ -76,7 +76,6 @@
     }
     
     [self.view endEditing:YES];
-    
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }

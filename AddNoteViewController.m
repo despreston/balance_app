@@ -66,25 +66,38 @@
 }
 
 - (void) createNoteButtons {
+    UIColor *buttonColor = [UIColor colorWithRed:46.0f/255.0f green:148.0f/255.0f blue:227.0f/255.0f alpha:1.0];
+    UIColor *borderColor = [UIColor colorWithRed:215.0f/255.0f green:215.0f/255.0f blue:215.0f/255.0f alpha:1.0];
+    NSString *thisTimeNoteText = @"I Did Work";
+    NSString *nextTimeNoteText = @"To Do Next";
+    
     // This Time note
     CGRect addThisTimeNoteFrame = self.addThisTimeNote.frame;
     addThisTimeNoteFrame.size = CGSizeMake(160, 55);
     self.addThisTimeNote.frame = addThisTimeNoteFrame;
-    [self.addThisTimeNote setTitle:@"I Did Work" forState:UIControlStateNormal];
+    [self.addThisTimeNote setTitle:thisTimeNoteText forState:UIControlStateNormal];
     self.addThisTimeNote.center = CGPointMake(85,75);
-    [self.addThisTimeNote setBackgroundColor:[UIColor colorWithRed:46.0f/255.0f green:148.0f/255.0f blue:227.0f/255.0f alpha:1.0]];
+    [self.addThisTimeNote setBackgroundColor:buttonColor];
     [self.addThisTimeNote setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.addThisTimeNote.layer.cornerRadius = 3;
+    self.addThisTimeNote.layer.shadowColor = borderColor.CGColor;
+    self.addThisTimeNote.layer.shadowOffset = CGSizeMake(0, 1.2);
+    self.addThisTimeNote.layer.shadowOpacity = 1.0;
+    self.addThisTimeNote.layer.shadowRadius = 0.0;
     
     // Next Time note
     CGRect addNextTimeNoteFrame = self.addNextTimeNote.frame;
     addNextTimeNoteFrame.size = CGSizeMake(160, 55);
     self.addNextTimeNote.frame = addThisTimeNoteFrame;
-    [self.addNextTimeNote setTitle:@"Note for Future" forState:UIControlStateNormal];
+    [self.addNextTimeNote setTitle:nextTimeNoteText forState:UIControlStateNormal];
     self.addNextTimeNote.center = CGPointMake(185,75);
-    [self.addNextTimeNote setBackgroundColor:[UIColor colorWithRed:46.0f/255.0f green:148.0f/255.0f blue:227.0f/255.0f alpha:1.0]];
+    [self.addNextTimeNote setBackgroundColor:buttonColor];
     [self.addNextTimeNote setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.addNextTimeNote.layer.cornerRadius = 3;
+    self.addNextTimeNote.layer.shadowColor = borderColor.CGColor;
+    self.addNextTimeNote.layer.shadowOffset = CGSizeMake(0, 1.2);
+    self.addNextTimeNote.layer.shadowOpacity = 1.0;
+    self.addNextTimeNote.layer.shadowRadius = 0.0;
 
 }
 
@@ -102,7 +115,7 @@
         [self.itemNote setTextColor:[UIColor lightGrayColor]];
     }
     if ([self.futureItemNote.text isEqual:@""] || self.futureItemNote.text == nil) {
-        self.futureItemNote.text = @"Tap 'Note for Future' to leave a note for next time.";
+        self.futureItemNote.text = @"Tap 'Leave a Task' to leave a new note for the future.";
         [self.futureItemNote setTextColor:[UIColor lightGrayColor]];
     }
 }

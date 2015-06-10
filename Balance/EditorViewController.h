@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EditorViewController : UIViewController <UITextViewDelegate>
+@class EditorViewController;
+
+@protocol EditorViewControllerDelegate <NSObject>
+- (void)addItem:(EditorViewController)controller didFinishEnteringItem:(NSManagedObject)
+@end
+
+@interface EditorViewController : UIViewController <UITextViewDelegate>;
 
 - (IBAction)Done:(id)sender;
 - (IBAction)ClearButtonPressed:(id)sender;

@@ -29,6 +29,10 @@
     return context;
 }
 
+- (void)createNewItemFromEditor:(EditorViewController *)controller didFinishEnteringItem:(NSManagedObject *)editedItem {
+    self.item = editedItem;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -138,6 +142,7 @@
         destViewController.noteToEdit = @"nextTimeNote";
     }
     
+    destViewController.editorDelegate = self;
     destViewController.item = self.item;
 }
 
@@ -151,6 +156,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    // Check for dirty activity name
     if ([self activityNameChanged] == YES) {
         [self.item setValue:self.activityName.text forKey:@"name"];
         if (!self.item) {

@@ -16,6 +16,7 @@
 @synthesize note;
 @synthesize noteToEdit;
 @synthesize item;
+@synthesize editorDelegate;
 
 - (NSManagedObjectContext *)managedObjectContext {
     NSManagedObjectContext *context = nil;
@@ -36,6 +37,8 @@
     if (self.item) {
         NSString *noteText = [self.item valueForKey:self.noteToEdit];
         [self.note setText:noteText];
+    } else {
+        
     }
     
     // set focus to text view
@@ -67,6 +70,9 @@
         NSManagedObject *newItem = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:context];
         [newItem setValue:[NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle] forKey:@"lastUpdate"];
         [newItem setValue:self.note.text forKey:self.noteToEdit];
+        
+        //set delegate to new item
+        [self.editorDelegate createNewItemFromEditor:self didFinishEnteringItem:newItem];
     }
     
     NSError *error = nil;

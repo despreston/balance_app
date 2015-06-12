@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EditorViewController.h"
 
-@interface AddNoteViewController : UIViewController
+@interface AddNoteViewController : UIViewController <EditorViewControllerDelegate>
 
 - (IBAction)editNoteButtonPressed:(id)sender;
 

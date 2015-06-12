@@ -69,6 +69,10 @@
         // Create a new item
         NSManagedObject *newItem = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:context];
         [newItem setValue:[NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle] forKey:@"lastUpdate"];
+        
+        // Have to set these values ahead of time because you cant set default value to empty string
+        [newItem setValue:@"" forKey:@"thisTimeNote"];
+        [newItem setValue:@"" forKey:@"nextTimeNote"];
         [newItem setValue:self.note.text forKey:self.noteToEdit];
         
         //set delegate to new item

@@ -34,7 +34,7 @@
 {
     [super viewDidAppear:animated];
     
-    // Fetch the devices from persistent data store
+    // Fetch the items from persistent data store
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Item"];
     self.items = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
@@ -50,7 +50,6 @@
     
     // register the custom cell
     [self.tableView registerNib:[UINib nibWithNibName:@"CustomCell" bundle:nil] forCellReuseIdentifier:@"ToDoItemCell"];
-
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -72,15 +71,12 @@
     return [self.items count];
 }
 
-//- (IBAction)unwindToMainMenu:(UIStoryboardSegue*)sender
-//{
-//        [self.tableView reloadData];
-//}
-
 - (CustomCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"ToDoItemCell";
     CustomCell *cell = (CustomCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     NSManagedObject *item = [self.items objectAtIndex:indexPath.row];
+    
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     // set texts
     [cell.name setText:[NSString stringWithFormat:@"%@", [item valueForKey:@"name"]]];
@@ -88,26 +84,8 @@
     [cell.nextText setText:[NSString stringWithFormat:@"%@", [item valueForKey:@"nextTimeNote"]]];
     [cell.lastUpdatedText setText:[NSString stringWithFormat:@"Last Update: %@", [item valueForKey:@"lastUpdate"]]];
     
-    // Cell View
-    UIView *cellView = [[UIView alloc]initWithFrame:CGRectMake(0,0, cell.frame.size.width, cell.frame.size.height)];
-    
-    // View for all content in each cell
-    UIView *cellContent = [[UIView alloc]initWithFrame:CGRectMake(5,10, cellView.frame.size.width-10, cellView.frame.size.height-15)];
-    cellContent.layer.borderWidth = 0.8f;
-    cellContent.layer.borderColor = [[UIColor colorWithRed:215.0f/255.0f green:215.0f/255.0f blue:215.0f/255.0f alpha:1.0] CGColor];
-    cellContent.layer.cornerRadius = 5;
-    [cellContent setBackgroundColor:[UIColor colorWithRed:253.0f/255.0f green:253.0f/255.0f blue:253.0f/255.0f alpha:1.0]];
-
-    // Add views
-    [cellView addSubview:cellContent];
-    [cell.contentView insertSubview:cellView atIndex:0];
-    
     [cell.lastText setNumberOfLines:0];
     [cell.lastText sizeToFit];
-    
-    if (cell == nil) {
-        cell = [[CustomCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-    }
     
     return cell;
 }

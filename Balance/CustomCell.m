@@ -10,14 +10,14 @@
 
 @implementation CustomCell
 
-@synthesize contentView;
+@synthesize content;
 
 - (void)awakeFromNib {
     // Initialization code
     
-    self.contentView.layer.borderColor = [[UIColor colorWithRed:215.0f/255.0f green:215.0f/255.0f blue:215.0f/255.0f alpha:1.0] CGColor];
-    self.contentView.layer.shadowColor = [[UIColor colorWithRed:240.0f/255.0f green:240.0f/255.0f blue:240.0f/255.0f alpha:1.0] CGColor];
-    self.contentView.layer.shadowPath = [[UIBezierPath bezierPathWithRect:self.contentView.layer.bounds] CGPath];
+    self.content.layer.borderColor = [[UIColor colorWithRed:215.0f/255.0f green:215.0f/255.0f blue:215.0f/255.0f alpha:1.0] CGColor];
+    self.content.layer.shadowColor = [[UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0] CGColor];
+    self.content.layer.shadowPath = [[UIBezierPath bezierPathWithRect:self.content.layer.bounds] CGPath];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

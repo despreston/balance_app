@@ -34,9 +34,9 @@
 {
     [super viewDidAppear:animated];
     
-    // Fetch the items from persistent data store
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Item"];
+   // NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdDate" ascending:YES];
     self.items = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
     [self.tableView reloadData];
@@ -84,8 +84,8 @@
     [cell.nextText setText:[NSString stringWithFormat:@"%@", [item valueForKey:@"nextTimeNote"]]];
     [cell.lastUpdatedText setText:[NSString stringWithFormat:@"Last Update: %@", [item valueForKey:@"lastUpdate"]]];
     
-    [cell.lastText setNumberOfLines:0];
     [cell.lastText sizeToFit];
+    [cell.nextText sizeToFit];
     
     return cell;
 }

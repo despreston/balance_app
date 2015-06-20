@@ -14,6 +14,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *nextText;
 @property (strong, nonatomic) IBOutlet UILabel *lastUpdatedText;
 @property (strong, nonatomic) IBOutlet UIView *cellView;
-@property (strong, nonatomic) IBOutlet UIView *contentView;
+@property (strong, nonatomic) IBOutlet UIView *content;
 
 @end

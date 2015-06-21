@@ -166,6 +166,12 @@
             [newItem setValue:@"" forKey:@"thisTimeNote"];
             [newItem setValue:@"" forKey:@"nextTimeNote"];
             [newItem setValue:[NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle] forKey:@"lastUpdate"];
+            
+            NSError *error = nil;
+            // Save the object to persistent store
+            if (![context save:&error]) {
+                NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+            }
         }
     }
 }

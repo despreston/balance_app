@@ -15,31 +15,13 @@
 @implementation EditorViewController
 @synthesize note;
 @synthesize noteToEdit;
-@synthesize item;
 @synthesize editorDelegate;
-
-- (NSManagedObjectContext *)managedObjectContext {
-    NSManagedObjectContext *context = nil;
-    id delegate = [[UIApplication sharedApplication] delegate];
-    if ([delegate performSelector:@selector(managedObjectContext)]) {
-        context = [delegate managedObjectContext];
-    }
-    return context;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     note.delegate = self;
-
     [[UINavigationBar appearanceWhenContainedIn:[EditorViewController class], nil] setBarTintColor:[UIColor whiteColor]];
-    
-    if (self.item) {
-        NSString *noteText = [self.item valueForKey:self.noteToEdit];
-        [self.note setText:noteText];
-    } else {
-        
-    }
     
     // set focus to text view
     [self.note becomeFirstResponder];
@@ -58,36 +40,9 @@
 }
 
 - (IBAction)Done:(id)sender {
-    NSManagedObjectContext *context = [self managedObjectContext];
-    
-    // Edit existing item
-    if (self.item) {
-        [self.item setValue:self.note.text forKey:self.noteToEdit];
-        [self.item setValue:[NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle] forKey:@"lastUpdate"];
-        
-    } else {
-        // Create a new item
-        NSManagedObject *newItem = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:context];
-        [newItem setValue:[NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle] forKey:@"lastUpdate"];
-        
-        // Have to set these values ahead of time because you cant set default value to empty string
-        [newItem setValue:@"" forKey:@"thisTimeNote"];
-        [newItem setValue:@"" forKey:@"nextTimeNote"];
-        [newItem setValue:self.note.text forKey:self.noteToEdit];
-        
-        //set delegate to new item
-        [self.editorDelegate createNewItemFromEditor:self didFinishEnteringItem:newItem];
-    }
-    
-    NSError *error = nil;
-    // Save the object to persistent store
-    if (![context save:&error]) {
-        NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
-    }
-    
+    [self.editorDelegate modifyItemFromEditor:self.note.text forNote:self.noteToEdit];
     [self.view endEditing:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
-    
 }
 
 - (IBAction)ClearButtonPressed:(id)sender {

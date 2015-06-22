@@ -7,17 +7,17 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--B A L A N C E-->
+        <!--main-->
         <scene sceneID="915-z5-rCv">
             <objects>
-                <tableViewController id="rSl-nk-Tel" customClass="ToDoListViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="main" title="main" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rSl-nk-Tel" customClass="ToDoListViewController" sceneMemberID="viewController">
                     <tableView key="view" autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="200" sectionHeaderHeight="22" sectionFooterHeight="22" id="csp-2p-pWH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="sectionIndexBackgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell autoresizesSubviews="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ToDoItemCell" rowHeight="200" id="DMb-4c-p0j" customClass="CustomCell">
+                            <tableViewCell autoresizesSubviews="NO" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ToDoItemCell" rowHeight="200" id="DMb-4c-p0j" customClass="CustomCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DMb-4c-p0j" id="lMF-tF-B3G">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -55,7 +55,7 @@
         <!--Editor-->
         <scene sceneID="tQy-dH-hEV">
             <objects>
-                <viewController modalPresentationStyle="overFullScreen" id="dYZ-X5-iIa" userLabel="Editor" customClass="EditorViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="editor" modalPresentationStyle="overFullScreen" id="dYZ-X5-iIa" userLabel="Editor" customClass="EditorViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cpi-qp-H0U"/>
                         <viewControllerLayoutGuide type="bottom" id="bfJ-KP-9mg"/>
@@ -138,7 +138,7 @@
         <!--Details-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="AddNoteViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="details" id="BYZ-38-t0r" customClass="AddNoteViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -359,6 +359,6 @@
         <image name="detail-icon.png" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZAR-Qt-6UK"/>
+        <segue reference="9Td-8a-JY6"/>
     </inferredMetricsTieBreakers>
 </document>

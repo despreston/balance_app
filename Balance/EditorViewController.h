@@ -11,7 +11,7 @@
 @class EditorViewController;
 
 @protocol EditorViewControllerDelegate <NSObject>
-- (void)createNewItemFromEditor:(EditorViewController *)controller didFinishEnteringItem:(NSManagedObject *)item;
+- (void)modifyItemFromEditor:(NSString *)note forNote:(NSString *)noteToEdit;
 @end
 
 @interface EditorViewController : UIViewController <UITextViewDelegate>;
@@ -19,7 +19,6 @@
 - (IBAction)Done:(id)sender;
 - (IBAction)ClearButtonPressed:(id)sender;
 @property (nonatomic, weak) id <EditorViewControllerDelegate> editorDelegate;
-@property (strong, nonatomic) NSManagedObject *item;
 @property (strong, nonatomic) IBOutlet UIButton *Cancel;
 @property (strong, nonatomic) IBOutlet UITextView *note;
 @property (strong, nonatomic) IBOutlet UIButton *Done;

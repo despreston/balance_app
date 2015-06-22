@@ -29,8 +29,13 @@
     return context;
 }
 
-- (void)createNewItemFromEditor:(EditorViewController *)controller didFinishEnteringItem:(NSManagedObject *)editedItem {
-    self.item = editedItem;
+- (void)modifyItemFromEditor:(NSString *)editedNote forNote:(NSString *)noteToEdit {
+    NSLog(@"%@ TO EDIT: %@", editedNote, noteToEdit);
+    if ([noteToEdit isEqual:@"thisTimeNote"]) {
+        self.itemNote.text = editedNote;
+    } else if ([noteToEdit isEqual:@"nextTimeNote"]) {
+        self.futureItemNote.text = editedNote;
+    }
 }
 
 - (void)viewDidLoad {
@@ -52,12 +57,9 @@
     // hide keyboard when clicking outside of textview
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
-    
-    [self showPlaceholderIfEmpty];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self loadData];
     [self showPlaceholderIfEmpty];
 }
 
@@ -65,8 +67,6 @@
     [self.activityName setText:[self.item valueForKey:@"name"]];
     [self.itemNote setText:[self.item valueForKey:@"thisTimeNote"]];
     [self.futureItemNote setText:[self.item valueForKey:@"nextTimeNote"]];
-    [self.itemNote setTextColor:[UIColor darkGrayColor]];
-    [self.futureItemNote setTextColor:[UIColor darkGrayColor]];
 }
 
 - (void) createNoteButtons {
@@ -114,13 +114,20 @@
 }
 
 - (void) showPlaceholderIfEmpty {
-    if ([self.itemNote.text isEqual:@""] || self.itemNote.text == nil) {
-        self.itemNote.text = @"Tap 'I Did Work' to add what you last did.";
+    NSString *itemNotePlaceholder = @"Tap 'I Did Work' to add what you finished.";
+    NSString *futureItemNotePlaceholder = @"Tap 'Leave a Task' to leave a new note for the future.";
+    
+    if ([self.itemNote.text isEqual:@""] || self.itemNote.text == nil || [self.itemNote.text isEqual:itemNotePlaceholder]) {
+        self.itemNote.text = itemNotePlaceholder;
         [self.itemNote setTextColor:[UIColor lightGrayColor]];
+    } else {
+        [self.itemNote setTextColor:[UIColor darkGrayColor]];
     }
-    if ([self.futureItemNote.text isEqual:@""] || self.futureItemNote.text == nil) {
-        self.futureItemNote.text = @"Tap 'Leave a Task' to leave a new note for the future.";
+    if ([self.futureItemNote.text isEqual:@""] || self.futureItemNote.text == nil || [self.futureItemNote.text isEqual:futureItemNotePlaceholder]) {
+        self.futureItemNote.text = futureItemNotePlaceholder;
         [self.futureItemNote setTextColor:[UIColor lightGrayColor]];
+    } else {
+        [self.futureItemNote setTextColor:[UIColor darkGrayColor]];
     }
 }
 
@@ -143,7 +150,7 @@
     }
     
     destViewController.editorDelegate = self;
-    destViewController.item = self.item;
+    destViewController.note.text = [self.item valueForKey:destViewController.noteToEdit];
 }
 
 - (BOOL)activityNameChanged {
@@ -158,19 +165,36 @@
 {
     // Check for dirty activity name
     if ([self activityNameChanged] == YES) {
-        [self.item setValue:self.activityName.text forKey:@"name"];
-        if (!self.item) {
+        // If VC count is >1 it means we are entering editor. Dont save yet!
+        // ugly. but works. I'm not pushing/popping controllers so this is how I can tell I am moving to main VC
+        NSArray *viewControllers = self.navigationController.viewControllers;
+        if (!self.item && viewControllers.count == 1) {
             NSManagedObjectContext *context = [self managedObjectContext];
             NSManagedObject *newItem = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext: context];
             [newItem setValue:self.activityName.text forKey:@"name"];
-            [newItem setValue:@"" forKey:@"thisTimeNote"];
-            [newItem setValue:@"" forKey:@"nextTimeNote"];
+            if ([self.itemNote.text isEqual:@"Tap 'I Did Work' to add what you finished."]) {
+                [newItem setValue:@"" forKey:@"thisTimeNote"];
+            } else {
+                [newItem setValue:self.itemNote.text forKey:@"thisTimeNote"];
+            }
+            if ([self.futureItemNote.text isEqual:@"Tap 'Leave a Task' to leave a new note for the future."]) {
+                [newItem setValue:@"" forKey:@"nextTimeNote"];
+            } else {
+                [newItem setValue:self.futureItemNote.text forKey:@"nextTimeNote"];
+            }
             [newItem setValue:[NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle] forKey:@"lastUpdate"];
-            
             NSError *error = nil;
             // Save the object to persistent store
             if (![context save:&error]) {
                 NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+            }
+        } else {
+            [self.item setValue:self.activityName.text forKey:@"name"];
+            if (![self.itemNote.text isEqual:@"Tap 'I Did Work' to add what you finished."]) {
+                [self.item setValue:self.itemNote.text forKey:@"thisTimeNote"];
+            }
+            if (![self.futureItemNote.text isEqual:@"Tap 'Leave a Task' to leave a new note for the future."]) {
+                [self.item setValue:self.futureItemNote.text forKey:@"nextTimeNote"];
             }
         }
     }

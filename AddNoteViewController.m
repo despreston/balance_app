@@ -44,17 +44,19 @@
     // Create and style the 2 main buttons at the top
     [self createNoteButtons];
     
+    self.activityName.delegate = self;
+    
     if (self.item) {
         [self toggleButtonsEnabled:YES];
         [self loadData];
+        CGRect temp = self.activityName.frame;
+        temp.size.height = CGFLOAT_MAX;
+        self.activityName.frame = temp;
+        [self.activityName sizeToFit];
     } else {
         [self toggleButtonsEnabled:NO];
         [self.activityName becomeFirstResponder];
     }
-    
-    // Activity name notification
-    [self.activityName addTarget:self action:@selector(activityNameSelected)forControlEvents:UIControlEventEditingDidBegin];
-    [self.activityName addTarget:self action:@selector(activityNameDeSelected)forControlEvents:UIControlEventEditingDidEnd];
     
     // hide keyboard when clicking outside of textview
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
@@ -123,18 +125,42 @@
     }
 }
 
-- (void) activityNameSelected {
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     self.activityName.textAlignment = NSTextAlignmentLeft;
+    //CGAffineTransform slide = CGAffineTransformMakeTranslation(-50.0f, 0.0f);
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.2];
+    [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+    [self.activityName setFrame:CGRectMake(10.0f, 75.0f, 100.0f, 42.0f)];
+    [UIView commitAnimations];
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.2];
+    [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+    [self.activityName setFrame:CGRectMake(10.0f, 75.0f, 300.0f, 42.0f)];
+    [UIView commitAnimations];
+    
     [self toggleButtonsEnabled:NO];
+    
+    return YES;
 }
 
-- (void) activityNameDeSelected {
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     self.activityName.textAlignment = NSTextAlignmentCenter;
+    [self.activityName sizeToFit];
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.2];
+    [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+    [self.activityName setFrame:CGRectMake(95.0f, 75.0f, self.activityName.bounds.size.width, 42.0f)];
+    [UIView commitAnimations];
     if ([self activityNameChanged]) {
         [self toggleButtonsEnabled:YES];
     } else {
         [self toggleButtonsEnabled:NO];
     }
+    
+    return YES;
 }
 
 - (void) showPlaceholderIfEmpty {

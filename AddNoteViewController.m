@@ -150,7 +150,6 @@
     }
     
     destViewController.editorDelegate = self;
-    destViewController.note.text = [self.item valueForKey:destViewController.noteToEdit];
 }
 
 - (BOOL)activityNameChanged {

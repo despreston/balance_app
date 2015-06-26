@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "EditorViewController.h"
 
-@interface AddNoteViewController : UIViewController <EditorViewControllerDelegate>
+@interface AddNoteViewController : UIViewController <EditorViewControllerDelegate, UITextFieldDelegate>
 
 - (IBAction)editNoteButtonPressed:(id)sender;
 

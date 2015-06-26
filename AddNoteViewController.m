@@ -165,7 +165,7 @@
 
 - (void) showPlaceholderIfEmpty {
     NSString *itemNotePlaceholder = @"Tap 'I Did Work' to add what you finished.";
-    NSString *futureItemNotePlaceholder = @"Tap 'Leave a Task' to leave a new note for the future.";
+    NSString *futureItemNotePlaceholder = @"Tap 'To Do Next' to leave a new note for the future.";
     
     if ([self.itemNote.text isEqual:@""] || self.itemNote.text == nil || [self.itemNote.text isEqual:itemNotePlaceholder]) {
         self.itemNote.text = itemNotePlaceholder;
@@ -226,7 +226,7 @@
             } else {
                 [newItem setValue:self.itemNote.text forKey:@"thisTimeNote"];
             }
-            if ([self.futureItemNote.text isEqual:@"Tap 'Leave a Task' to leave a new note for the future."]) {
+            if ([self.futureItemNote.text isEqual:@"Tap 'To Do Next' to leave a new note for the future."]) {
                 [newItem setValue:@"" forKey:@"nextTimeNote"];
             } else {
                 [newItem setValue:self.futureItemNote.text forKey:@"nextTimeNote"];
@@ -242,7 +242,7 @@
             if (![self.itemNote.text isEqual:@"Tap 'I Did Work' to add what you finished."]) {
                 [self.item setValue:self.itemNote.text forKey:@"thisTimeNote"];
             }
-            if (![self.futureItemNote.text isEqual:@"Tap 'Leave a Task' to leave a new note for the future."]) {
+            if (![self.futureItemNote.text isEqual:@"Tap 'To Do Next' to leave a new note for the future."]) {
                 [self.item setValue:self.futureItemNote.text forKey:@"nextTimeNote"];
             }
         }

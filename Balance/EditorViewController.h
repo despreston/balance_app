@@ -23,6 +23,7 @@
 @property (strong, nonatomic) IBOutlet UITextView *note;
 @property (strong, nonatomic) IBOutlet UIButton *Done;
 @property (strong, nonatomic) NSString *noteToEdit;
+@property (strong, nonatomic) NSString *editNote;
 @property (strong, nonatomic) IBOutlet UIButton *ClearButton;
 
 

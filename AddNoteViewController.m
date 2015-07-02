@@ -185,17 +185,41 @@
     [self.view endEditing:YES];
 }
 
-- (IBAction)editNoteButtonPressed:(id)sender {
-    [self performSegueWithIdentifier:@"editNote" sender:sender];
+- (IBAction)createNoteButtonPressed:(id)sender {
+    [self performSegueWithIdentifier:@"createNote" sender:sender];
+}
+
+- (IBAction)createBottomMenu:(id)sender {
+    UIButton *pressedButton = (UIButton *)sender;
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Note Options" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction* editNote = [UIAlertAction actionWithTitle:@"Edit Note" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+            [self performSegueWithIdentifier:@"editNote" sender:pressedButton];
+    }];
+    UIAlertAction* clearNote = [UIAlertAction actionWithTitle:@"Clear" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
+    UIAlertAction* Cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:editNote];
+    [alert addAction:clearNote];
+    [alert addAction:Cancel];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
     UIButton *pressedButton = (UIButton *)sender;
     EditorViewController *destViewController = segue.destinationViewController;
     
     if ([pressedButton.titleLabel.text isEqualToString:self.addThisTimeNote.titleLabel.text]) {
         destViewController.noteToEdit = @"thisTimeNote";
+        if ([segue.identifier isEqualToString:@"editNote"] && ![self.itemNote.text isEqualToString:@"Tap 'I Did Work' to add what you finished."]) {
+            destViewController.editNote = self.itemNote.text;
+        }
     } else if ([pressedButton.titleLabel.text isEqualToString:self.addNextTimeNote.titleLabel.text]) {
+        if ([segue.identifier isEqualToString:@"editNote"] && ![self.futureItemNote.text isEqualToString:@"Tap 'To Do Next' to leave a new note for the future."]) {
+            destViewController.note.text = self.futureItemNote.text;
+        }
         destViewController.noteToEdit = @"nextTimeNote";
     }
     
@@ -248,5 +272,4 @@
         }
     }
 }
-
 @end

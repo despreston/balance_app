@@ -16,11 +16,12 @@
 @synthesize note;
 @synthesize noteToEdit;
 @synthesize editorDelegate;
+@synthesize editNote;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     note.delegate = self;
+    note.text = editNote;
     [[UINavigationBar appearanceWhenContainedIn:[EditorViewController class], nil] setBarTintColor:[UIColor whiteColor]];
     
     // set focus to text view

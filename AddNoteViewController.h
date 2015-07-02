@@ -11,7 +11,7 @@
 
 @interface AddNoteViewController : UIViewController <EditorViewControllerDelegate, UITextFieldDelegate>
 
-- (IBAction)editNoteButtonPressed:(id)sender;
+- (IBAction)createNoteButtonPressed:(id)sender;
 
 @property (strong, nonatomic) NSManagedObject *item;
 @property (strong, nonatomic) IBOutlet UILabel *itemNote;
@@ -22,4 +22,5 @@
 @property (strong, nonatomic) IBOutlet UILabel *futureItemNote;
 @property (strong, nonatomic) IBOutlet UIButton *addThisTimeNote;
 @property (strong, nonatomic) IBOutlet UIButton *addNextTimeNote;
+- (IBAction)createBottomMenu:(id)sender;
 @end

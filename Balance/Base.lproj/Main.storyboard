@@ -190,7 +190,7 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap 'To Do Next' to leave a new note for the future." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JnT-Xi-Q01">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="nextTimeNote" text="Tap 'To Do Next' to leave a new note for the future." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JnT-Xi-Q01">
                                         <rect key="frame" x="8" y="396" width="304" height="38"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -207,7 +207,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="editNoteButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yA8-YV-Imx"/>
+                                            <action selector="createNoteButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bej-0S-yIp"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5u5-8B-Stv">
@@ -220,26 +220,32 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="editNoteButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="f5g-LO-MTC"/>
+                                            <action selector="createNoteButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="E36-mF-wec"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oe1-d9-M9a">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" restorationIdentifier="thisTimeOptions" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oe1-d9-M9a">
                                         <rect key="frame" x="285" y="174" width="27" height="31"/>
-                                        <state key="normal" title="Button" image="detail-icon.png">
+                                        <state key="normal" title="I Did Work" image="detail-icon.png">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="createBottomMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Jxy-sk-iS9"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BVU-NX-NI9">
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" restorationIdentifier="nextTimeOptions" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BVU-NX-NI9">
                                         <rect key="frame" x="285" y="354" width="27" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="b6H-lW-gdh"/>
                                         </constraints>
-                                        <state key="normal" title="Button" image="detail-icon.png">
+                                        <state key="normal" title="To Do Next" image="detail-icon.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="createBottomMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dbH-d9-0Ph"/>
+                                        </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap 'I Did Work' to add what you finished." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UvN-cP-XYg">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="thisTimeNote" text="Tap 'I Did Work' to add what you finished." lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UvN-cP-XYg">
                                         <rect key="frame" x="8" y="218" width="304" height="19"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -324,7 +330,8 @@
                         <outlet property="futureItemNote" destination="JnT-Xi-Q01" id="jc8-gJ-FF4"/>
                         <outlet property="itemNote" destination="UvN-cP-XYg" id="KaP-85-oUW"/>
                         <segue destination="vmd-X4-S95" kind="unwind" identifier="unwindToMainMenu" unwindAction="unwindToMainMenu:" id="9pc-6P-FPr"/>
-                        <segue destination="dYZ-X5-iIa" kind="presentation" identifier="editNote" modalPresentationStyle="fullScreen" id="3Dj-Pb-7g9"/>
+                        <segue destination="dYZ-X5-iIa" kind="presentation" identifier="createNote" modalPresentationStyle="fullScreen" id="3Dj-Pb-7g9"/>
+                        <segue destination="dYZ-X5-iIa" kind="presentation" identifier="editNote" modalPresentationStyle="fullScreen" id="IYJ-R2-LAm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -360,5 +367,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="9Td-8a-JY6"/>
+        <segue reference="IYJ-R2-LAm"/>
     </inferredMetricsTieBreakers>
 </document>

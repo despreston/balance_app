@@ -19,12 +19,12 @@
 - (IBAction)Done:(id)sender;
 - (IBAction)ClearButtonPressed:(id)sender;
 @property (nonatomic, weak) id <EditorViewControllerDelegate> editorDelegate;
-@property (strong, nonatomic) IBOutlet UIButton *Cancel;
-@property (strong, nonatomic) IBOutlet UITextView *note;
-@property (strong, nonatomic) IBOutlet UIButton *Done;
-@property (strong, nonatomic) NSString *noteToEdit;
-@property (strong, nonatomic) NSString *editNote;
-@property (strong, nonatomic) IBOutlet UIButton *ClearButton;
+@property (weak, nonatomic) IBOutlet UIButton *Cancel;
+@property (weak, nonatomic) IBOutlet UITextView *note;
+@property (weak, nonatomic) IBOutlet UIButton *Done;
+@property (weak, nonatomic) NSString *noteToEdit;
+@property (weak, nonatomic) NSString *editNote;
+@property (weak, nonatomic) IBOutlet UIButton *ClearButton;
 
 
 

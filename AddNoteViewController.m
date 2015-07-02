@@ -197,7 +197,13 @@
     UIAlertAction* editNote = [UIAlertAction actionWithTitle:@"Edit Note" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
             [self performSegueWithIdentifier:@"editNote" sender:pressedButton];
     }];
-    UIAlertAction* clearNote = [UIAlertAction actionWithTitle:@"Clear" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {}];
+    UIAlertAction* clearNote = [UIAlertAction actionWithTitle:@"Clear" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        if (pressedButton.tag == 1) {
+            self.itemNote.text = @"";
+        } else if(pressedButton.tag == 2) {
+            self.futureItemNote.text = @"";
+        }
+    }];
     UIAlertAction* Cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {}];
     
     [alert addAction:editNote];
@@ -218,7 +224,7 @@
         }
     } else if ([pressedButton.titleLabel.text isEqualToString:self.addNextTimeNote.titleLabel.text]) {
         if ([segue.identifier isEqualToString:@"editNote"] && ![self.futureItemNote.text isEqualToString:@"Tap 'To Do Next' to leave a new note for the future."]) {
-            destViewController.note.text = self.futureItemNote.text;
+            destViewController.editNote = self.futureItemNote.text;
         }
         destViewController.noteToEdit = @"nextTimeNote";
     }

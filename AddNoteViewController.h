@@ -13,14 +13,14 @@
 
 - (IBAction)createNoteButtonPressed:(id)sender;
 
-@property (strong, nonatomic) NSManagedObject *item;
-@property (strong, nonatomic) IBOutlet UILabel *itemNote;
+@property (weak, nonatomic) NSManagedObject *item;
+@property (weak, nonatomic) IBOutlet UILabel *itemNote;
 @property (strong, nonatomic) IBOutlet UITextField *activityName;
-@property (strong, nonatomic) IBOutlet UILabel *ThisTimeLabel;
-@property (strong, nonatomic) IBOutlet UILabel *NextTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *ThisTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *NextTimeLabel;
 @property (strong, nonatomic) IBOutlet UIScrollView *ScrollView;
-@property (strong, nonatomic) IBOutlet UILabel *futureItemNote;
-@property (strong, nonatomic) IBOutlet UIButton *addThisTimeNote;
-@property (strong, nonatomic) IBOutlet UIButton *addNextTimeNote;
+@property (weak, nonatomic) IBOutlet UILabel *futureItemNote;
+@property (weak, nonatomic) IBOutlet UIButton *addThisTimeNote;
+@property (weak, nonatomic) IBOutlet UIButton *addNextTimeNote;
 - (IBAction)createBottomMenu:(id)sender;
 @end

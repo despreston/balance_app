@@ -11,6 +11,9 @@
 #import "EditorViewController.h"
 #import <CoreData/CoreData.h>
 
+#define ITEM_NOTE_PLACEHOLDER "Tap 'I Did Work' to add what you finished."
+#define FUTURE_NOTE_PLACEHOLDER "Tap 'To Do Next' to leave a new note for the future."
+
 @interface AddNoteViewController()
 @end
 
@@ -30,7 +33,6 @@
 }
 
 - (void)modifyItemFromEditor:(NSString *)editedNote forNote:(NSString *)noteToEdit {
-    NSLog(@"%@ TO EDIT: %@", editedNote, noteToEdit);
     if ([noteToEdit isEqual:@"thisTimeNote"]) {
         self.itemNote.text = editedNote;
     } else if ([noteToEdit isEqual:@"nextTimeNote"]) {
@@ -154,7 +156,7 @@
     [UIView setAnimationCurve:UIViewAnimationCurveLinear];
     [self.activityName setFrame:CGRectMake(95.0f, 75.0f, self.activityName.bounds.size.width, 42.0f)];
     [UIView commitAnimations];
-    if ([self activityNameChanged]) {
+    if ([self activityNameValid]) {
         [self toggleButtonsEnabled:YES];
     } else {
         [self toggleButtonsEnabled:NO];
@@ -164,17 +166,14 @@
 }
 
 - (void) showPlaceholderIfEmpty {
-    NSString *itemNotePlaceholder = @"Tap 'I Did Work' to add what you finished.";
-    NSString *futureItemNotePlaceholder = @"Tap 'To Do Next' to leave a new note for the future.";
-    
-    if ([self.itemNote.text isEqual:@""] || self.itemNote.text == nil || [self.itemNote.text isEqual:itemNotePlaceholder]) {
-        self.itemNote.text = itemNotePlaceholder;
+    if ([self.itemNote.text isEqual:@""] || self.itemNote.text == nil || [self.itemNote.text isEqual:@ITEM_NOTE_PLACEHOLDER]) {
+        self.itemNote.text = @ITEM_NOTE_PLACEHOLDER;
         [self.itemNote setTextColor:[UIColor lightGrayColor]];
     } else {
         [self.itemNote setTextColor:[UIColor darkGrayColor]];
     }
-    if ([self.futureItemNote.text isEqual:@""] || self.futureItemNote.text == nil || [self.futureItemNote.text isEqual:futureItemNotePlaceholder]) {
-        self.futureItemNote.text = futureItemNotePlaceholder;
+    if ([self.futureItemNote.text isEqual:@""] || self.futureItemNote.text == nil || [self.futureItemNote.text isEqual:@FUTURE_NOTE_PLACEHOLDER]) {
+        self.futureItemNote.text = @FUTURE_NOTE_PLACEHOLDER;
         [self.futureItemNote setTextColor:[UIColor lightGrayColor]];
     } else {
         [self.futureItemNote setTextColor:[UIColor darkGrayColor]];
@@ -213,17 +212,16 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
     UIButton *pressedButton = (UIButton *)sender;
     EditorViewController *destViewController = segue.destinationViewController;
     
     if ([pressedButton.titleLabel.text isEqualToString:self.addThisTimeNote.titleLabel.text]) {
         destViewController.noteToEdit = @"thisTimeNote";
-        if ([segue.identifier isEqualToString:@"editNote"] && ![self.itemNote.text isEqualToString:@"Tap 'I Did Work' to add what you finished."]) {
+        if ([segue.identifier isEqualToString:@"editNote"] && ![self.itemNote.text isEqualToString:@ITEM_NOTE_PLACEHOLDER]) {
             destViewController.editNote = self.itemNote.text;
         }
     } else if ([pressedButton.titleLabel.text isEqualToString:self.addNextTimeNote.titleLabel.text]) {
-        if ([segue.identifier isEqualToString:@"editNote"] && ![self.futureItemNote.text isEqualToString:@"Tap 'To Do Next' to leave a new note for the future."]) {
+        if ([segue.identifier isEqualToString:@"editNote"] && ![self.futureItemNote.text isEqualToString:@FUTURE_NOTE_PLACEHOLDER]) {
             destViewController.editNote = self.futureItemNote.text;
         }
         destViewController.noteToEdit = @"nextTimeNote";
@@ -232,8 +230,19 @@
     destViewController.editorDelegate = self;
 }
 
-- (BOOL)activityNameChanged {
+- (BOOL)activityNameValid {
     if (![self.activityName.text isEqual:@""]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (BOOL) fieldsChanged {
+    NSString *storedItemNote = [self.item valueForKey:@"thisTimeNote"];
+    NSString *storedFutureItemNote = [self.item valueForKey:@"nextTimeNote"];
+    
+    if (![self.itemNote.text isEqual:storedItemNote] || ![self.futureItemNote.text isEqual:storedFutureItemNote] || ![self.activityName.text isEqual:[self.item valueForKey:@"name"]]) {
         return YES;
     } else {
         return NO;
@@ -243,20 +252,21 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     // Check for dirty activity name
-    if ([self activityNameChanged] == YES) {
+    if ([self activityNameValid] == YES) {
         // If VC count is >1 it means we are entering editor. Dont save yet!
         // ugly. but works. I'm not pushing/popping controllers so this is how I can tell I am moving to main VC
         NSArray *viewControllers = self.navigationController.viewControllers;
+        
         if (!self.item && viewControllers.count == 1) {
             NSManagedObjectContext *context = [self managedObjectContext];
             NSManagedObject *newItem = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext: context];
             [newItem setValue:self.activityName.text forKey:@"name"];
-            if ([self.itemNote.text isEqual:@"Tap 'I Did Work' to add what you finished."]) {
+            if ([self.itemNote.text isEqual:@ITEM_NOTE_PLACEHOLDER]) {
                 [newItem setValue:@"" forKey:@"thisTimeNote"];
             } else {
                 [newItem setValue:self.itemNote.text forKey:@"thisTimeNote"];
             }
-            if ([self.futureItemNote.text isEqual:@"Tap 'To Do Next' to leave a new note for the future."]) {
+            if ([self.futureItemNote.text isEqual:@FUTURE_NOTE_PLACEHOLDER]) {
                 [newItem setValue:@"" forKey:@"nextTimeNote"];
             } else {
                 [newItem setValue:self.futureItemNote.text forKey:@"nextTimeNote"];
@@ -267,13 +277,20 @@
             if (![context save:&error]) {
                 NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
             }
-        } else {
+        } else if ([self fieldsChanged] && viewControllers.count == 1) {
+            NSManagedObjectContext *context = [self managedObjectContext];
             [self.item setValue:self.activityName.text forKey:@"name"];
-            if (![self.itemNote.text isEqual:@"Tap 'I Did Work' to add what you finished."]) {
+            if (![self.itemNote.text isEqual:@ITEM_NOTE_PLACEHOLDER]) {
                 [self.item setValue:self.itemNote.text forKey:@"thisTimeNote"];
             }
-            if (![self.futureItemNote.text isEqual:@"Tap 'To Do Next' to leave a new note for the future."]) {
+            if (![self.futureItemNote.text isEqual:@FUTURE_NOTE_PLACEHOLDER]) {
                 [self.item setValue:self.futureItemNote.text forKey:@"nextTimeNote"];
+            }
+            [self.item setValue:[NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle] forKey:@"lastUpdate"];
+            NSError *error = nil;
+            // Save the object to persistent store
+            if (![context save:&error]) {
+                NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
             }
         }
     }

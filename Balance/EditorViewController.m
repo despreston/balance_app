@@ -9,6 +9,7 @@
 #import "EditorViewController.h"
 
 @interface EditorViewController ()
+@property (nonatomic, strong) JFMinimalNotification* itemNoteMessage;
 
 @end
 
@@ -17,6 +18,7 @@
 @synthesize noteToEdit;
 @synthesize editorDelegate;
 @synthesize editNote;
+@synthesize itemNoteMessage;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,6 +28,11 @@
     
     // set focus to text view
     [self.note becomeFirstResponder];
+    
+    self.itemNoteMessage = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleDefault title:@"Nice!" subTitle:@"What did you get done this time?"];
+    
+    //[self.view addSubview:self.itemNoteMessage];
+    //[self.itemNoteMessage show];
 }
 
 -(BOOL)prefersStatusBarHidden{
@@ -54,6 +61,10 @@
 - (IBAction)Back:(id)sender{
     [self.view endEditing:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)dealloc {
+    self.itemNoteMessage = nil;
 }
 
 @end

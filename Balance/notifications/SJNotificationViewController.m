@@ -36,10 +36,11 @@
     return self;
 }
 
-- (id)initWithParentView:(UIView*)p title:(NSString*)t level:(SJNotificationLevel)l position:(SJNotificationPosition)pos spinner:(BOOL)sp {
+- (id)initWithParentView:(UIView*)p title:(NSString*)t level:(SJNotificationLevel)l position:(SJNotificationPosition)pos spinner:(BOOL)sp lines:(int)lines {
     self = [super initWithNibName:@"SJNotificationViewController" bundle:nil];
     if (self) {
         [self setParentView:p];
+        [self setNumberOfLines:lines];
         [self setNotificationTitle:t];
         [self setNotificationLevel:l];
         [self setNotificationPosition:pos];
@@ -52,7 +53,7 @@
 
 - (void)show {
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-	
+    
 	/* Attach to the parent view. */
 	CGFloat yPosition;
 	switch (notificationPosition) {
@@ -127,6 +128,13 @@
     }
     
     return y;
+}
+
+#pragma mark - Setting Number of Lines
+
+- (void)setNumberOfLines:(int)numLines {
+    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height + (10 * numLines));
+    label.frame = CGRectMake(label.frame.origin.x, label.frame.origin.y, label.frame.size.width, label.frame.size.height + (10 * numLines));
 }
 
 #pragma mark - Setting Notification Title

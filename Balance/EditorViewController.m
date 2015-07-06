@@ -9,7 +9,7 @@
 #import "EditorViewController.h"
 
 @interface EditorViewController ()
-@property (nonatomic, strong) JFMinimalNotification* itemNoteMessage;
+@property (nonatomic, strong) SJNotificationViewController* messageController;
 
 @end
 
@@ -18,7 +18,7 @@
 @synthesize noteToEdit;
 @synthesize editorDelegate;
 @synthesize editNote;
-@synthesize itemNoteMessage;
+@synthesize messageController;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,10 +29,19 @@
     // set focus to text view
     [self.note becomeFirstResponder];
     
-    self.itemNoteMessage = [JFMinimalNotification notificationWithStyle:JFMinimalNotificationStyleDefault title:@"Nice!" subTitle:@"What did you get done this time?"];
-    
-    //[self.view addSubview:self.itemNoteMessage];
-    //[self.itemNoteMessage show];
+    self.messageController = [[SJNotificationViewController alloc] initWithNibName:@"SJNotificationViewController" bundle:nil];
+    [self.messageController setParentView:self.note];
+    if ([self.noteToEdit isEqual:@"thisTimeNote"]) {
+        [self.messageController setNumberOfLines:1];
+        [self.messageController setNotificationTitle:@"Nice! What did you finish this time?"];
+    } else if ([self.noteToEdit isEqual:@"nextTimeNote"]) {
+        [self.messageController setNumberOfLines:2];
+        [self.messageController setNotificationTitle:@"Leave a note that will help you get started quickly next time."];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self.messageController show];
 }
 
 -(BOOL)prefersStatusBarHidden{
@@ -40,6 +49,7 @@
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
+    [self.messageController hide];
     if (![self.note.text isEqualToString:@""]) {
         self.Done.enabled = YES;
     } else {
@@ -64,7 +74,7 @@
 }
 
 - (void)dealloc {
-    self.itemNoteMessage = nil;
+    self.messageController = nil;
 }
 
 @end

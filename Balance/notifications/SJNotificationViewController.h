@@ -30,12 +30,13 @@ typedef enum {
 	IBOutlet UIActivityIndicatorView *spinner;
 	BOOL showSpinner;
 	NSString *notificationTitle;
+    int lines;
 }
 
 @property (strong, nonatomic) UIView *parentView;
 @property (nonatomic) SJNotificationPosition notificationPosition;
 
-- (id)initWithParentView:(UIView*)p title:(NSString*)t level:(SJNotificationLevel)l position:(SJNotificationPosition)pos spinner:(BOOL)sp;
+- (id)initWithParentView:(UIView*)p title:(NSString*)t level:(SJNotificationLevel)l position:(SJNotificationPosition)pos spinner:(BOOL)sp lines:(int)lines;
 
 - (void)setShowSpinner:(BOOL)b;
 - (void)setNotificationLevel:(SJNotificationLevel)level;
@@ -46,6 +47,7 @@ typedef enum {
 - (void)showFor:(NSInteger)seconds;
 - (void)setNotificationTitle:(NSString *)t;
 - (void)setTapTarget:(id)target selector:(SEL)selector;
+- (void)setNumberOfLines:(int)lines;
 
 - (CGFloat)yPositionWhenHidden:(BOOL)hidden;
 

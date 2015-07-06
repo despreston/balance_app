@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "JFMinimalNotification.h"
+#import "SJNotificationViewController.h"
 
 @class EditorViewController;
 
@@ -26,7 +26,5 @@
 @property (weak, nonatomic) NSString *noteToEdit;
 @property (weak, nonatomic) NSString *editNote;
 @property (weak, nonatomic) IBOutlet UIButton *ClearButton;
-
-
 
 @end

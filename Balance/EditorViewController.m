@@ -29,14 +29,16 @@
     // set focus to text view
     [self.note becomeFirstResponder];
     
-    self.messageController = [[SJNotificationViewController alloc] initWithNibName:@"SJNotificationViewController" bundle:nil];
-    [self.messageController setParentView:self.note];
-    if ([self.noteToEdit isEqual:@"thisTimeNote"]) {
-        [self.messageController setNumberOfLines:1];
-        [self.messageController setNotificationTitle:@"Nice! What did you finish this time?"];
-    } else if ([self.noteToEdit isEqual:@"nextTimeNote"]) {
-        [self.messageController setNumberOfLines:2];
-        [self.messageController setNotificationTitle:@"Leave a note that will help you get started quickly next time."];
+    if ([self.note.text isEqualToString:@""]) {
+        self.messageController = [[SJNotificationViewController alloc] initWithNibName:@"SJNotificationViewController" bundle:nil];
+        [self.messageController setParentView:self.note];
+        if ([self.noteToEdit isEqual:@"thisTimeNote"]) {
+            [self.messageController setNumberOfLines:1];
+            [self.messageController setNotificationTitle:@"Nice! What did you finish this time?"];
+        } else if ([self.noteToEdit isEqual:@"nextTimeNote"]) {
+            [self.messageController setNumberOfLines:2];
+            [self.messageController setNotificationTitle:@"Leave a note that will help you get started quickly next time."];
+        }
     }
 }
 

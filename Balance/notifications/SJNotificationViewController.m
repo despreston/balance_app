@@ -36,11 +36,11 @@
     return self;
 }
 
-- (id)initWithParentView:(UIView*)p title:(NSString*)t level:(SJNotificationLevel)l position:(SJNotificationPosition)pos spinner:(BOOL)sp lines:(int)lines {
+- (id)initWithParentView:(UIView*)p title:(NSString*)t level:(SJNotificationLevel)l position:(SJNotificationPosition)pos spinner:(BOOL)sp lines:(int)the_lines {
     self = [super initWithNibName:@"SJNotificationViewController" bundle:nil];
     if (self) {
         [self setParentView:p];
-        [self setNumberOfLines:lines];
+        [self setNumberOfLines:the_lines];
         [self setNotificationTitle:t];
         [self setNotificationLevel:l];
         [self setNotificationPosition:pos];

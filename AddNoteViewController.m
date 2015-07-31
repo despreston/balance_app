@@ -154,7 +154,11 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.2];
     [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-    [self.activityName setFrame:CGRectMake(95.0f, 75.0f, self.activityName.bounds.size.width, 42.0f)];
+    
+    CGRect bounds = self.activityName.superview.bounds;
+    self.activityName.center = CGPointMake(CGRectGetMidX(bounds), 95.0f);
+    
+    //[self.activityName setFrame:CGRectMake(95.0f, 75.0f, self.activityName.bounds.size.width, 42.0f)];
     [UIView commitAnimations];
     if ([self activityNameValid]) {
         [self toggleButtonsEnabled:YES];

@@ -26,5 +26,6 @@
 @property (weak, nonatomic) NSString *noteToEdit;
 @property (weak, nonatomic) NSString *editNote;
 @property (weak, nonatomic) IBOutlet UIButton *ClearButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *note_bottom;
 
 @end

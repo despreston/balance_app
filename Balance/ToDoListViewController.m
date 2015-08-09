@@ -82,7 +82,9 @@
     [cell.name setText:[NSString stringWithFormat:@"%@", [item valueForKey:@"name"]]];
     [cell.lastText setText:[NSString stringWithFormat:@"%@", [item valueForKey:@"thisTimeNote"]]];
     [cell.nextText setText:[NSString stringWithFormat:@"%@", [item valueForKey:@"nextTimeNote"]]];
-    [cell.lastUpdatedText setText:[NSString stringWithFormat:@"Last Update: %@", [item valueForKey:@"lastUpdate"]]];
+    
+    NSString *lastUpdated = [NSDateFormatter localizedStringFromDate:[item valueForKey:@"lastUpdate"] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+    [cell.lastUpdatedText setText:[NSString stringWithFormat:@"Last Update: %@", lastUpdated]];
     
     [cell.lastText sizeToFit];
     [cell.nextText sizeToFit];
@@ -90,10 +92,42 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(CustomCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSManagedObject *item = [self.items objectAtIndex:indexPath.row];
+    UIColor *color = [self getStatusColor:[item valueForKey:@"lastUpdate"]];
+    [cell.update_status setBackgroundColor:color];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self performSegueWithIdentifier:@"showItemNote" sender:nil];
 }
 
+- (UIColor *)getStatusColor:(NSDate *)lastUpdate {
+    NSDateFormatter *dateFormatter =[[NSDateFormatter alloc] init];
+    NSDateComponents *components;
+    NSInteger days;
+    
+    /* Calculate diff in days between now and last updated date */
+    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:lastUpdate toDate:[[NSDate alloc]init] options:0];
+    days = [components day];
+    
+    NSLog(@"%d", days);
+    
+    if (days < 1) {
+        /* light green */
+        return [UIColor colorWithRed:140.0f/255.0f green:191.0f/255.0f blue:81.0f/255.0f alpha:65.0f];
+    } else if (days >= 1 && days < 7) {
+        /* white */
+        return [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:65.0f];
+    } else if (days >= 7 && days < 14) {
+        /* light orange */
+        return [UIColor colorWithRed:255.0f/255.0f green:178.0f/255.0f blue:102.0f/255.0f alpha:65.0f];
+    } else {
+        /* light red */
+        return [UIColor colorWithRed:255.0f/255.0f green:114.0f/255.0f blue:114.0f/255.0f alpha:65.0f];
+    }
+}
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -11,6 +11,7 @@
 @implementation CustomCell
 
 @synthesize content;
+@synthesize update_status;
 
 - (void)awakeFromNib {
     // Initialization code

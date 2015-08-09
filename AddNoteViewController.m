@@ -248,7 +248,7 @@
     
     if (![self.itemNote.text isEqual:storedItemNote] || ![self.futureItemNote.text isEqual:storedFutureItemNote] || ![self.activityName.text isEqual:[self.item valueForKey:@"name"]]) {
         return YES;
-    } else {
+    } else {    
         return NO;
     }
 }
@@ -275,7 +275,8 @@
             } else {
                 [newItem setValue:self.futureItemNote.text forKey:@"nextTimeNote"];
             }
-            [newItem setValue:[NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle] forKey:@"lastUpdate"];
+            [newItem setValue:[[NSDate alloc]init] forKey:@"lastUpdate"];
+            //[newItem setValue:[NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle] forKey:@"lastUpdate"];
             NSError *error = nil;
             // Save the object to persistent store
             if (![context save:&error]) {
@@ -290,7 +291,8 @@
             if (![self.futureItemNote.text isEqual:@FUTURE_NOTE_PLACEHOLDER]) {
                 [self.item setValue:self.futureItemNote.text forKey:@"nextTimeNote"];
             }
-            [self.item setValue:[NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle] forKey:@"lastUpdate"];
+            [self.item setValue:[[NSDate alloc]init] forKey:@"lastUpdate"];
+            //[self.item setValue:[NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle] forKey:@"lastUpdate"];
             NSError *error = nil;
             // Save the object to persistent store
             if (![context save:&error]) {

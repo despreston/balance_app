@@ -246,9 +246,9 @@
     NSString *storedItemNote = [self.item valueForKey:@"thisTimeNote"];
     NSString *storedFutureItemNote = [self.item valueForKey:@"nextTimeNote"];
     
-    if (![self.itemNote.text isEqual:storedItemNote] || ![self.futureItemNote.text isEqual:storedFutureItemNote] || ![self.activityName.text isEqual:[self.item valueForKey:@"name"]]) {
+    if ((![self.itemNote.text isEqual:storedItemNote] && ![self.itemNote.text isEqual:@ITEM_NOTE_PLACEHOLDER]) || (![self.futureItemNote.text isEqual:storedFutureItemNote] && ![self.futureItemNote.text isEqual:@FUTURE_NOTE_PLACEHOLDER]) || ![self.activityName.text isEqual:[self.item valueForKey:@"name"]]) {
         return YES;
-    } else {    
+    } else {
         return NO;
     }
 }

@@ -66,7 +66,9 @@
 			break;
 	}
 	
-	[self.view setFrame:CGRectMake(0, yPosition, self.view.frame.size.width, self.view.frame.size.height)];
+    
+    
+	[self.view setFrame:CGRectMake(0, yPosition, [parentView frame].size.width, self.view.frame.size.height)];
 	[parentView addSubview:self.view];
 	
 	[UIView animateWithDuration:SLIDE_DURATION
@@ -74,7 +76,7 @@
 						 /* Slide the notification view into place. */
 						 CGRect shownRect = CGRectMake(0,
 													   [self yPositionWhenHidden:NO],
-													   self.view.frame.size.width,
+													   [parentView frame].size.width,
 													   self.view.frame.size.height);
 						 [self.view setFrame:shownRect];
 					 }

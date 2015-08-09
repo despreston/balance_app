@@ -32,6 +32,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
 
     [[UINavigationBar appearanceWhenContainedIn:[EditorViewController class], nil] setBarTintColor:[UIColor whiteColor]];
+    [self.view layoutIfNeeded];
     
     // set focus to text view
     [self.note becomeFirstResponder];
@@ -58,6 +59,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    NSLog(@"%f", self.note_bottom.constant);
     [self.messageController show];
 }
 

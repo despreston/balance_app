@@ -376,6 +376,8 @@
                         <outlet property="addThisTimeNote" destination="ge2-EP-Af3" id="Zvq-36-dEg"/>
                         <outlet property="futureItemNote" destination="JnT-Xi-Q01" id="jc8-gJ-FF4"/>
                         <outlet property="itemNote" destination="UvN-cP-XYg" id="KaP-85-oUW"/>
+                        <outlet property="nextTimeOptions" destination="BVU-NX-NI9" id="J9P-Kj-epl"/>
+                        <outlet property="thisTimeOptions" destination="oe1-d9-M9a" id="bCv-qi-ABc"/>
                         <segue destination="vmd-X4-S95" kind="unwind" identifier="unwindToMainMenu" unwindAction="unwindToMainMenu:" id="9pc-6P-FPr"/>
                         <segue destination="dYZ-X5-iIa" kind="presentation" identifier="createNote" modalPresentationStyle="fullScreen" id="3Dj-Pb-7g9"/>
                         <segue destination="dYZ-X5-iIa" kind="presentation" identifier="editNote" modalPresentationStyle="fullScreen" id="IYJ-R2-LAm"/>

@@ -22,5 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *futureItemNote;
 @property (weak, nonatomic) IBOutlet UIButton *addThisTimeNote;
 @property (weak, nonatomic) IBOutlet UIButton *addNextTimeNote;
+@property (weak, nonatomic) IBOutlet UIButton *thisTimeOptions;
+@property (weak, nonatomic) IBOutlet UIButton *nextTimeOptions;
 - (IBAction)createBottomMenu:(id)sender;
 @end

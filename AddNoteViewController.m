@@ -117,11 +117,15 @@
     if (enabled == YES) {
         [self.addNextTimeNote setEnabled:YES];
         [self.addThisTimeNote setEnabled:YES];
+        [self.thisTimeOptions setEnabled:YES];
+        [self.nextTimeOptions setEnabled:YES];
         [self.addThisTimeNote setBackgroundColor:buttonColor];
         [self.addNextTimeNote setBackgroundColor:buttonColor];
     } else {
         [self.addNextTimeNote setEnabled:NO];
         [self.addThisTimeNote setEnabled:NO];
+        [self.thisTimeOptions setEnabled:NO];
+        [self.nextTimeOptions setEnabled:NO];
         [self.addThisTimeNote setBackgroundColor:disabledButtonColor];
         [self.addNextTimeNote setBackgroundColor:disabledButtonColor];
     }

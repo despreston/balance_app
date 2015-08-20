@@ -9,6 +9,7 @@
 #import "ToDoListViewController.h"
 #import "AddNoteViewController.h"
 #import "CustomCell.h"
+#import "guide.h"
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
@@ -40,6 +41,13 @@
     self.items = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
     [self.tableView reloadData];
+    BOOL newUser = YES;
+    
+    if (newUser) {
+        guide *newUserGuide = [[guide alloc]initWithNibName:@"guide" bundle:nil];
+        newUserGuide.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        [self presentViewController:newUserGuide animated:YES completion:nil];
+    }
 }
 
 - (void)viewDidLoad {
@@ -111,8 +119,6 @@
     [dateFormatter setDateStyle:NSDateFormatterShortStyle];
     components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:lastUpdate toDate:[[NSDate alloc]init] options:0];
     days = [components day];
-    
-    NSLog(@"%d", days);
     
     if (days < 1) {
         /* light green */

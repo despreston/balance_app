@@ -20,6 +20,8 @@
 		486A94251A929E5B00D6785E /* BalanceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 486A94241A929E5B00D6785E /* BalanceTests.m */; };
 		486A94301A92D0E000D6785E /* AddNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 486A942F1A92D0E000D6785E /* AddNoteViewController.m */; };
 		486A94331A92D19100D6785E /* ToDoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 486A94321A92D19100D6785E /* ToDoListViewController.m */; };
+		48729D5C1B853CDD00C4725E /* guide.m in Sources */ = {isa = PBXBuildFile; fileRef = 48729D5A1B853CDD00C4725E /* guide.m */; };
+		48729D5D1B853CDD00C4725E /* guide.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48729D5B1B853CDD00C4725E /* guide.xib */; };
 		4878CD3A1B0D4D7D009935C3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4878CD391B0D4D7D009935C3 /* CoreData.framework */; };
 		4878CD3D1B0D5DB6009935C3 /* Prefix.pch in Sources */ = {isa = PBXBuildFile; fileRef = 4878CD3B1B0D5C0F009935C3 /* Prefix.pch */; };
 		4879152F1B4A23D7006F152D /* SJNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4879152D1B4A23D7006F152D /* SJNotificationViewController.m */; };
@@ -61,6 +63,9 @@
 		486A942F1A92D0E000D6785E /* AddNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddNoteViewController.m; path = ../AddNoteViewController.m; sourceTree = "<group>"; };
 		486A94311A92D19100D6785E /* ToDoListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoListViewController.h; sourceTree = "<group>"; };
 		486A94321A92D19100D6785E /* ToDoListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoListViewController.m; sourceTree = "<group>"; };
+		48729D591B853CDD00C4725E /* guide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = guide.h; sourceTree = "<group>"; };
+		48729D5A1B853CDD00C4725E /* guide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = guide.m; sourceTree = "<group>"; };
+		48729D5B1B853CDD00C4725E /* guide.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = guide.xib; sourceTree = "<group>"; };
 		4878CD391B0D4D7D009935C3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		4878CD3B1B0D5C0F009935C3 /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		4879152C1B4A23D7006F152D /* SJNotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SJNotificationViewController.h; sourceTree = "<group>"; };
@@ -141,6 +146,9 @@
 				4851C80B1B1BD7120001B6A6 /* CustomCell.xib */,
 				489CAA671B2293E5009F0F6C /* EditorViewController.h */,
 				489CAA681B2293E5009F0F6C /* EditorViewController.m */,
+				48729D591B853CDD00C4725E /* guide.h */,
+				48729D5A1B853CDD00C4725E /* guide.m */,
+				48729D5B1B853CDD00C4725E /* guide.xib */,
 			);
 			path = Balance;
 			sourceTree = "<group>";
@@ -266,6 +274,7 @@
 				486A94141A929E5B00D6785E /* Main.storyboard in Resources */,
 				4851C8141B1CC6660001B6A6 /* detail-icon.png in Resources */,
 				4851C80C1B1BD7120001B6A6 /* CustomCell.xib in Resources */,
+				48729D5D1B853CDD00C4725E /* guide.xib in Resources */,
 				486A94191A929E5B00D6785E /* LaunchScreen.xib in Resources */,
 				486037991AE171430032B5C9 /* HelveticaNeue.dfont in Resources */,
 				486A94161A929E5B00D6785E /* Images.xcassets in Resources */,
@@ -297,6 +306,7 @@
 				484742581AD853D4000E58FF /* BANavigationController.m in Sources */,
 				4851C80A1B1BD6E40001B6A6 /* CustomCell.m in Sources */,
 				48DA22C31B09FB7C00B98D6D /* BalanceItem.xcdatamodeld in Sources */,
+				48729D5C1B853CDD00C4725E /* guide.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

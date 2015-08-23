@@ -15,6 +15,8 @@
 
 @interface ToDoListViewController ()
 @property (strong) NSMutableArray *items;
+@property (strong) NSMutableArray *User;
+@property (nonatomic, weak) UIView *emptyGridView;
 @end
 
 @implementation ToDoListViewController
@@ -40,13 +42,18 @@
    // NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdDate" ascending:YES];
     self.items = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
-    [self.tableView reloadData];
-    BOOL newUser = YES;
+    [self handleEmptyGridView];
     
-    if (newUser) {
-        guide *newUserGuide = [[guide alloc]initWithNibName:@"guide" bundle:nil];
-        newUserGuide.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-        [self presentViewController:newUserGuide animated:YES completion:nil];
+    [self.tableView reloadData];
+}
+
+- (void) handleEmptyGridView {
+    if (self.items.count < 1 && ![self.emptyGridView isDescendantOfView:self.view]) {
+        NSArray *subviews = [[NSBundle mainBundle] loadNibNamed:@"emptyGridView" owner:self options:nil];
+        self.emptyGridView = [subviews objectAtIndex:0];
+        [self.view addSubview:self.emptyGridView];
+    } else if (self.items.count > 0){
+        [self.emptyGridView removeFromSuperview];
     }
 }
 
@@ -66,6 +73,12 @@
         AddNoteViewController *destViewController = segue.destinationViewController;
         destViewController.item = selectedItem;
     }
+}
+
+- (IBAction)showGuideTap:(id)sender {
+    guide *newUserGuide = [[guide alloc]initWithNibName:@"guide" bundle:nil];
+    newUserGuide.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self presentViewController:newUserGuide animated:YES completion:nil];
 }
 
 #pragma mark - Table view data source
@@ -155,6 +168,7 @@
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
     [self.tableView endUpdates];
+    [self handleEmptyGridView];
 }
 
 - (void)AddItem:(id)sender {

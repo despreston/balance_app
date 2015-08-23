@@ -11,6 +11,9 @@
 		4851C80A1B1BD6E40001B6A6 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4851C8091B1BD6E40001B6A6 /* CustomCell.m */; };
 		4851C80C1B1BD7120001B6A6 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4851C80B1B1BD7120001B6A6 /* CustomCell.xib */; };
 		4851C8141B1CC6660001B6A6 /* detail-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4851C8131B1CC6660001B6A6 /* detail-icon.png */; };
+		485FD7541B8662A2007E65C4 /* emptyGridView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 485FD7531B8662A2007E65C4 /* emptyGridView.xib */; };
+		485FD75E1B8669D2007E65C4 /* balance@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 485FD75D1B8669D2007E65C4 /* balance@2x.png */; };
+		485FD7601B866A0B007E65C4 /* balance_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 485FD75F1B866A0B007E65C4 /* balance_small@2x.png */; };
 		486037991AE171430032B5C9 /* HelveticaNeue.dfont in Resources */ = {isa = PBXBuildFile; fileRef = 486037981AE171430032B5C9 /* HelveticaNeue.dfont */; };
 		486A940B1A929E5B00D6785E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 486A940A1A929E5B00D6785E /* main.m */; };
 		486A940E1A929E5B00D6785E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 486A940D1A929E5B00D6785E /* AppDelegate.m */; };
@@ -47,6 +50,9 @@
 		4851C8091B1BD6E40001B6A6 /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
 		4851C80B1B1BD7120001B6A6 /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
 		4851C8131B1CC6660001B6A6 /* detail-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "detail-icon.png"; sourceTree = "<group>"; };
+		485FD7531B8662A2007E65C4 /* emptyGridView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = emptyGridView.xib; sourceTree = "<group>"; };
+		485FD75D1B8669D2007E65C4 /* balance@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "balance@2x.png"; path = "Images.xcassets/balance@2x.png"; sourceTree = "<group>"; };
+		485FD75F1B866A0B007E65C4 /* balance_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "balance_small@2x.png"; path = "Images.xcassets/balance_small@2x.png"; sourceTree = "<group>"; };
 		486037981AE171430032B5C9 /* HelveticaNeue.dfont */ = {isa = PBXFileReference; lastKnownFileType = file; path = HelveticaNeue.dfont; sourceTree = "<group>"; };
 		486A94051A929E5B00D6785E /* Balance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Balance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		486A94091A929E5B00D6785E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -98,6 +104,8 @@
 		486037971AE1701D0032B5C9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				485FD75F1B866A0B007E65C4 /* balance_small@2x.png */,
+				485FD75D1B8669D2007E65C4 /* balance@2x.png */,
 				4851C8131B1CC6660001B6A6 /* detail-icon.png */,
 				486037981AE171430032B5C9 /* HelveticaNeue.dfont */,
 			);
@@ -149,6 +157,7 @@
 				48729D591B853CDD00C4725E /* guide.h */,
 				48729D5A1B853CDD00C4725E /* guide.m */,
 				48729D5B1B853CDD00C4725E /* guide.xib */,
+				485FD7531B8662A2007E65C4 /* emptyGridView.xib */,
 			);
 			path = Balance;
 			sourceTree = "<group>";
@@ -275,8 +284,11 @@
 				4851C8141B1CC6660001B6A6 /* detail-icon.png in Resources */,
 				4851C80C1B1BD7120001B6A6 /* CustomCell.xib in Resources */,
 				48729D5D1B853CDD00C4725E /* guide.xib in Resources */,
+				485FD75E1B8669D2007E65C4 /* balance@2x.png in Resources */,
+				485FD7601B866A0B007E65C4 /* balance_small@2x.png in Resources */,
 				486A94191A929E5B00D6785E /* LaunchScreen.xib in Resources */,
 				486037991AE171430032B5C9 /* HelveticaNeue.dfont in Resources */,
+				485FD7541B8662A2007E65C4 /* emptyGridView.xib in Resources */,
 				486A94161A929E5B00D6785E /* Images.xcassets in Resources */,
 				487915301B4A23D7006F152D /* SJNotificationViewController.xib in Resources */,
 			);

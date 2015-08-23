@@ -6,7 +6,11 @@
         <attribute name="nextTimeNote" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="thisTimeNote" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="User" syncable="YES">
+        <attribute name="isNewUser" optional="YES" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Item" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="User" positionX="-63" positionY="9" width="128" height="60"/>
     </elements>
 </model>

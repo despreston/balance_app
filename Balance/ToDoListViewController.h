@@ -13,5 +13,6 @@
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 
 - (IBAction)AddItem:(id)sender;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *showGuideBtn;
 
 @end

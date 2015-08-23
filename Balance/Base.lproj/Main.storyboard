@@ -35,6 +35,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="B A L A N C E" id="ydt-da-d4x">
+                        <barButtonItem key="leftBarButtonItem" title="! ?" width="50" id="r5V-IQ-vec">
+                            <connections>
+                                <action selector="showGuideTap:" destination="rSl-nk-Tel" id="7gP-g4-GUO"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="y2m-4l-8HA">
                             <connections>
                                 <action selector="AddItem:" destination="rSl-nk-Tel" id="kJN-VD-LZ4"/>
@@ -45,6 +50,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="showGuideBtn" destination="r5V-IQ-vec" id="ggV-CL-4e2"/>
                         <outlet property="tableView" destination="csp-2p-pWH" id="tfh-oG-IjN"/>
                     </connections>
                 </tableViewController>

@@ -133,19 +133,13 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     self.activityName.textAlignment = NSTextAlignmentLeft;
-    //CGAffineTransform slide = CGAffineTransformMakeTranslation(-50.0f, 0.0f);
     
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.2];
     [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-    [self.activityName setFrame:CGRectMake(10.0f, 75.0f, 100.0f, 42.0f)];
+    self.activityName.center = CGPointMake((self.activityName.frame.size.width/2)+10.0f, 95.0f);
     [UIView commitAnimations];
-    
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.2];
-    [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-    [self.activityName setFrame:CGRectMake(10.0f, 75.0f, 300.0f, 42.0f)];
-    [UIView commitAnimations];
+    [self.activityName setFrame:CGRectMake(self.activityName.frame.origin.x, self.activityName.frame.origin.y, self.view.frame.size.width-10.0f, self.activityName.frame.size.height)];
     
     [self toggleButtonsEnabled:NO];
     
@@ -161,9 +155,9 @@
     
     CGRect bounds = self.activityName.superview.bounds;
     self.activityName.center = CGPointMake(CGRectGetMidX(bounds), 95.0f);
-    
-    //[self.activityName setFrame:CGRectMake(95.0f, 75.0f, self.activityName.bounds.size.width, 42.0f)];
+
     [UIView commitAnimations];
+    
     if ([self activityNameValid]) {
         [self toggleButtonsEnabled:YES];
     } else {

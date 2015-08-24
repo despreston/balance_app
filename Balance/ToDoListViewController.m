@@ -52,6 +52,22 @@
         NSArray *subviews = [[NSBundle mainBundle] loadNibNamed:@"emptyGridView" owner:self options:nil];
         self.emptyGridView = [subviews objectAtIndex:0];
         [self.view addSubview:self.emptyGridView];
+        
+        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.emptyGridView
+                                                              attribute:NSLayoutAttributeLeading
+                                                              relatedBy:NSLayoutRelationEqual
+                                                              toItem:self.view
+                                                              attribute:NSLayoutAttributeLeading
+                                                              multiplier:1.0
+                                                               constant:0.0]];
+        
+        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.emptyGridView
+                                                              attribute:NSLayoutAttributeTrailing
+                                                              relatedBy:NSLayoutRelationEqual
+                                                                 toItem:self.view
+                                                              attribute:NSLayoutAttributeTrailing
+                                                             multiplier:1.0
+                                                               constant:0.0]];
     } else if (self.items.count > 0){
         [self.emptyGridView removeFromSuperview];
     }

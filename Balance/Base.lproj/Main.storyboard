@@ -345,8 +345,8 @@
                                     <constraint firstItem="NXy-s1-6dS" firstAttribute="leading" secondItem="See-cU-ZW7" secondAttribute="leading" constant="24" id="eHh-Fe-2tX"/>
                                     <constraint firstItem="UvN-cP-XYg" firstAttribute="leading" secondItem="FnA-q3-DoS" secondAttribute="leading" id="eYn-aZ-dNR"/>
                                     <constraint firstItem="Nmf-wL-TUf" firstAttribute="centerX" secondItem="NXy-s1-6dS" secondAttribute="centerX" id="enF-Bi-K3U"/>
+                                    <constraint firstItem="1tv-DX-X2j" firstAttribute="top" relation="greaterThanOrEqual" secondItem="UvN-cP-XYg" secondAttribute="bottom" constant="30" id="f2D-J8-3iS"/>
                                     <constraint firstItem="JnT-Xi-Q01" firstAttribute="top" secondItem="S89-ft-bwd" secondAttribute="bottom" constant="12" id="fLn-6c-C4l"/>
-                                    <constraint firstItem="JnT-Xi-Q01" firstAttribute="top" relation="greaterThanOrEqual" secondItem="UvN-cP-XYg" secondAttribute="bottom" constant="50" id="gpE-Db-DH1"/>
                                     <constraint firstItem="UvN-cP-XYg" firstAttribute="top" secondItem="FnA-q3-DoS" secondAttribute="bottom" constant="16" id="hJQ-cs-2X7"/>
                                     <constraint firstItem="5u5-8B-Stv" firstAttribute="baseline" secondItem="ge2-EP-Af3" secondAttribute="firstBaseline" id="hfL-P2-Egp"/>
                                     <constraint firstItem="ge2-EP-Af3" firstAttribute="top" secondItem="NXy-s1-6dS" secondAttribute="bottom" constant="4" id="iPs-mT-4V4"/>

@@ -51,23 +51,11 @@
     if (self.items.count < 1 && ![self.emptyGridView isDescendantOfView:self.view]) {
         NSArray *subviews = [[NSBundle mainBundle] loadNibNamed:@"emptyGridView" owner:self options:nil];
         self.emptyGridView = [subviews objectAtIndex:0];
+        
+        /* Need to update size of subview because even though its inferred its not updating correctly when being added as a subview. */
+        [self.emptyGridView setFrame:CGRectMake(self.emptyGridView.frame.origin.x, self.emptyGridView.frame.origin.y, self.view.frame.size.width, self.emptyGridView.frame.size.height)];
+        
         [self.view addSubview:self.emptyGridView];
-        
-        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.emptyGridView
-                                                              attribute:NSLayoutAttributeLeading
-                                                              relatedBy:NSLayoutRelationEqual
-                                                              toItem:self.view
-                                                              attribute:NSLayoutAttributeLeading
-                                                              multiplier:1.0
-                                                               constant:0.0]];
-        
-        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.emptyGridView
-                                                              attribute:NSLayoutAttributeTrailing
-                                                              relatedBy:NSLayoutRelationEqual
-                                                                 toItem:self.view
-                                                              attribute:NSLayoutAttributeTrailing
-                                                             multiplier:1.0
-                                                               constant:0.0]];
     } else if (self.items.count > 0){
         [self.emptyGridView removeFromSuperview];
     }

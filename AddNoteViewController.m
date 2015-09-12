@@ -135,7 +135,7 @@
     self.activityName.textAlignment = NSTextAlignmentLeft;
     
     [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.2];
+    [UIView setAnimationDuration:0.15];
     [UIView setAnimationCurve:UIViewAnimationCurveLinear];
     self.activityName.center = CGPointMake((self.activityName.frame.size.width/2)+10.0f, 95.0f);
     [UIView commitAnimations];
@@ -150,7 +150,7 @@
     self.activityName.textAlignment = NSTextAlignmentCenter;
     [self.activityName sizeToFit];
     [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.2];
+    [UIView setAnimationDuration:0.15];
     [UIView setAnimationCurve:UIViewAnimationCurveLinear];
     
     CGRect bounds = self.activityName.superview.bounds;
